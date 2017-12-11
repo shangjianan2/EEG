@@ -43,3 +43,6 @@ D:\kunge\my\csharp\1209\EEG\EEG\obj\Debug\EEG.csprojResolveAssemblyReference.cac
 D:\kunge\my\csharp\1209\EEG\EEG\obj\Debug\EEG.Form1.resources
 D:\kunge\my\csharp\1209\EEG\EEG\obj\Debug\EEG.Properties.Resources.resources
 D:\kunge\my\csharp\1209\EEG\EEG\obj\Debug\EEG.csproj.GenerateResource.Cache
+D:\kunge\my\csharp\1211\EEG\EEG\bin\Debug\EEG.exe.config
+D:\kunge\my\csharp\1211\EEG\EEG\obj\Debug\EEG.exe
+D:\kunge\my\csharp\1211\EEG\EEG\obj\Debug\EEG.pdb

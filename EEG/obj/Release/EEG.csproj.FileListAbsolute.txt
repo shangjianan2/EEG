@@ -1,0 +1,9 @@
+D:\kunge\my\csharp\1115reborn\EEG\EEG\bin\Release\EEG.exe.config
+D:\kunge\my\csharp\1115reborn\EEG\EEG\bin\Release\EEG.exe
+D:\kunge\my\csharp\1115reborn\EEG\EEG\bin\Release\EEG.pdb
+D:\kunge\my\csharp\1115reborn\EEG\EEG\bin\Release\CyUSB.dll
+D:\kunge\my\csharp\1115reborn\EEG\EEG\obj\Release\EEG.Form1.resources
+D:\kunge\my\csharp\1115reborn\EEG\EEG\obj\Release\EEG.Properties.Resources.resources
+D:\kunge\my\csharp\1115reborn\EEG\EEG\obj\Release\EEG.csproj.GenerateResource.Cache
+D:\kunge\my\csharp\1115reborn\EEG\EEG\obj\Release\EEG.exe
+D:\kunge\my\csharp\1115reborn\EEG\EEG\obj\Release\EEG.pdb

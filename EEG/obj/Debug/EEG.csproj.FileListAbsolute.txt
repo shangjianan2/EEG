@@ -46,3 +46,33 @@ D:\kunge\my\csharp\1209\EEG\EEG\obj\Debug\EEG.csproj.GenerateResource.Cache
 D:\kunge\my\csharp\1211\EEG\EEG\bin\Debug\EEG.exe.config
 D:\kunge\my\csharp\1211\EEG\EEG\obj\Debug\EEG.exe
 D:\kunge\my\csharp\1211\EEG\EEG\obj\Debug\EEG.pdb
+E:\program\visual studio\EEG\EEG\bin\Debug\EEG.exe.config
+E:\program\visual studio\EEG\EEG\obj\Debug\EEG.exe
+E:\program\visual studio\EEG\EEG\obj\Debug\EEG.pdb
+C:\Users\pc\Desktop\EEG\EEG\bin\Debug\EEG.exe.config
+C:\Users\pc\Desktop\EEG\EEG\obj\Debug\EEG.exe
+C:\Users\pc\Desktop\EEG\EEG\obj\Debug\EEG.pdb
+C:\Users\pc\Desktop\EEG\EEG\bin\Debug\EEG.exe
+C:\Users\pc\Desktop\EEG\EEG\bin\Debug\EEG.pdb
+C:\Users\pc\Desktop\EEG\EEG\obj\Debug\EEG.csprojResolveAssemblyReference.cache
+C:\Users\pc\Desktop\EEG\EEG\obj\Debug\EEG.Form1.resources
+C:\Users\pc\Desktop\EEG\EEG\obj\Debug\EEG.Properties.Resources.resources
+C:\Users\pc\Desktop\EEG\EEG\obj\Debug\EEG.csproj.GenerateResource.Cache
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\bin\Debug\EEG.exe.config
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\obj\Debug\EEG.exe
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\obj\Debug\EEG.pdb
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\bin\Debug\EEG.exe
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\bin\Debug\EEG.pdb
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\obj\Debug\EEG.csprojResolveAssemblyReference.cache
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\obj\Debug\EEG.Form1.resources
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\obj\Debug\EEG.Properties.Resources.resources
+C:\Users\pc\Desktop\latest_prog\EEG\EEG\obj\Debug\EEG.csproj.GenerateResource.Cache
+C:\Users\windows10\Desktop\EEG\EEG\bin\Debug\EEG.exe.config
+C:\Users\windows10\Desktop\EEG\EEG\obj\Debug\EEG.exe
+C:\Users\windows10\Desktop\EEG\EEG\obj\Debug\EEG.pdb
+C:\Users\windows10\Desktop\EEG\EEG\bin\Debug\EEG.exe
+C:\Users\windows10\Desktop\EEG\EEG\bin\Debug\EEG.pdb
+C:\Users\windows10\Desktop\EEG\EEG\obj\Debug\EEG.csprojResolveAssemblyReference.cache
+C:\Users\windows10\Desktop\EEG\EEG\obj\Debug\EEG.Form1.resources
+C:\Users\windows10\Desktop\EEG\EEG\obj\Debug\EEG.Properties.Resources.resources
+C:\Users\windows10\Desktop\EEG\EEG\obj\Debug\EEG.csproj.GenerateResource.Cache

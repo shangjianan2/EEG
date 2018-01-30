@@ -35,7 +35,7 @@ namespace EEG
         bool[] SelectChanel = null;
 
         int len = len_const;//接收缓存的长度,由于此变量会由XferData回传实际读取（或接收）的值，所以不能用const修饰
-        int ChangeModeFlag_Int = 0;//0为正常输出模式，1为阻抗检测模式
+        int ChangeModeFlag_Int = 0;//0为正常输出模式，1为阻抗检测模式        
 
         const int len_const = 512;
         const int Display_Num = 1000;
@@ -50,7 +50,10 @@ namespace EEG
 
         double ChangColorNum = 0;//picturebox颜色改变
         double[] FIR_h = new double[1024];//瞎J8给的数，保证滤波器阶数要小于
-        double[] FlagButton_BoolArray = new double[41];//存储阻抗数值        
+        double[] FlagButton_BoolArray = new double[41];//存储阻抗数值   
+        double[] maxValue = new double[41];//阻抗模式中电压最大值
+        double[] minValue = new double[41];//阻抗模式中电压最小值
+        double[] youxiaoValue = new double[41];//有效值
 
         ConcurrentQueue<byte[]> recQueue_test = null;
         ConcurrentQueue<byte[]> recQueue_Save = null;
@@ -223,6 +226,8 @@ namespace EEG
                 FangDa_FenBie[i][1] = 0;
                 FangDa_FenBie[i][2] = 0;
             }
+
+            
         }
 
         void Init_ChanelListView()
@@ -621,28 +626,73 @@ namespace EEG
             }
             else//阻抗模式
             {
-                JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
+                //JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
 
-                Action<double[]> action = (button) =>
+                //Action<double[]> action = (button) =>
+                //{
+                //    for (int i = 1; i <= 32; i++)
+                //    {
+                //        Change_ButtonColor(ref Array_Button[i], button[i]);
+                //    }
+                //    for (int i = 37; i <= 40; i++)
+                //    {
+                //        Change_ButtonColor(ref Array_Button[i], button[i]);
+                //    }
+                //};
+                
+                //for (int i = 1; i < 41; i++)
+                //{
+                //    //FlagButton_BoolArray[i] = (erweishuzu_Circle_Array[i].Circle_Array_T[erweishuzu_Circle_Array[i].Index_Array_Save] * 4.5 * coef_a / 8388607.0 - coef_b);
+                //    FlagButton_BoolArray[i] = (erweishuzu_Circle_Array[i].Circle_Array_T[erweishuzu_Circle_Array[i].Index_Array_Save] * 4.5 / 8388607.0);
+                
+                //}
+                //this.Invoke(action, FlagButton_BoolArray);
+
+
+                //为最大值和最小值赋初值
+                for (int i = 0; i < TongDaoShu - 1; i++)
                 {
+                    maxValue[i] = 0;
+                    minValue[i] = 1000;
+                }
+
+                if (test_FIR_ttt == false)
+                    //JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
+                    JieXiShuJu_tt(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
+                else
+                    //JieXiLvBoShuJu(ref recQueue_test, ref FIR_h, ref erweishuzu_Circle_Array, SelectChanel);
+                    JieXiLvBoShuJu_tt(ref recQueue_test, ref FIR_h, ref erweishuzu_Circle_Array, SelectChanel);
+
+                int temp_Index = erweishuzu_Circle_Array[1].Index_Array_Save;
+
+                Action<bool> action = (x) =>
+                {
+                    for (int j = 0; j < 40; j++)
+                    {
+                        temp_Index = erweishuzu_Circle_Array[j + 1].Index_Array_Save;
+                        for (int i = 0; i < 500; i++)//500组数据对应500毫秒
+                        {
+                            //serial_ch[j].Points.AddXY(i, (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index) + j * 1000) * 4.5 / 8388607.0);
+                            //获取每个通道的最小值
+                            maxValue[j] = (maxValue[j] < (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) ? (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) : maxValue[j]);
+                            minValue[j] = (minValue[j] > (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) ? (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) : minValue[j]);
+                        }
+                        youxiaoValue[j + 1] = (maxValue[j] - minValue[j]) * 0.70710678 * 4.5 / 8388607.0;
+                    }
+
                     for (int i = 1; i <= 32; i++)
                     {
-                        Change_ButtonColor(ref Array_Button[i], button[i]);
+                        Change_ButtonColor(ref Array_Button[i], youxiaoValue[i]);
                     }
                     for (int i = 37; i <= 40; i++)
                     {
-                        Change_ButtonColor(ref Array_Button[i], button[i]);
+                        Change_ButtonColor(ref Array_Button[i], youxiaoValue[i]);
                     }
                 };
-                
-                for (int i = 1; i < 41; i++)
-                {
-                    FlagButton_BoolArray[i] = (erweishuzu_Circle_Array[i].Circle_Array_T[erweishuzu_Circle_Array[i].Index_Array_Save] * 4.5 * coef_a / 8388607.0 - coef_b);
-                }
-                this.Invoke(action, FlagButton_BoolArray);
+                this.Invoke(action, true);
             }
 
-            //System.Diagnostics.Debug.WriteLine("display {0}", stopwatch_test.ElapsedMilliseconds);
+            System.Diagnostics.Debug.WriteLine("display {0}", stopwatch_test.ElapsedMilliseconds);
             stopwatch_test.Reset();
         }
 
@@ -650,66 +700,66 @@ namespace EEG
         {
             Param_Button.Text = ZuKang.ToString();
             
-            if (ZuKang > 430)
-            {
-                Param_Button.BackColor = Color.Fuchsia;//20.0
-            }
-            else if (ZuKang > 400)
-            {
-                Param_Button.BackColor = Color.Indigo;//18.9
-            }
-            else if (ZuKang > 370)
-            {
-                Param_Button.BackColor = Color.OrangeRed;//17.9
-            }
-            else if (ZuKang > 340)
-            {
-                Param_Button.BackColor = Color.DarkOrange;//16.8
-            }
-            else if (ZuKang > 310)
-            {
-                Param_Button.BackColor = Color.Sienna;//15.7
-            }
-            else if (ZuKang > 280)
-            {
-                Param_Button.BackColor = Color.Khaki;//14.6
-            }
-            else if (ZuKang > 250)
-            {
-                Param_Button.BackColor = Color.Yellow;//13.6
-            }
-            else if (ZuKang > 220)
-            {
-                Param_Button.BackColor = Color.GreenYellow;//12.5
-            }
-            else if (ZuKang > 190)
-            {
-                Param_Button.BackColor = Color.Green;//11.4
-            }
-            else if (ZuKang > 160)
-            {
-                Param_Button.BackColor = Color.DarkGreen;//10.4
-            }
-            else if (ZuKang > 130)
-            {
-                Param_Button.BackColor = Color.SkyBlue;//9.3
-            }
-            else if (ZuKang > 100)
-            {
-                Param_Button.BackColor = Color.DarkTurquoise;//8.2
-            }
-            else if (ZuKang > 70)
-            {
-                Param_Button.BackColor = Color.DeepSkyBlue;//7.1
-            }
-            else if (ZuKang > 40)
-            {
-                Param_Button.BackColor = Color.Blue;//6
-            }
-            else
-            {
-                Param_Button.BackColor = Color.MidnightBlue;//5
-            }
+            //if (ZuKang > 430)
+            //{
+            //    Param_Button.BackColor = Color.Fuchsia;//20.0
+            //}
+            //else if (ZuKang > 400)
+            //{
+            //    Param_Button.BackColor = Color.Indigo;//18.9
+            //}
+            //else if (ZuKang > 370)
+            //{
+            //    Param_Button.BackColor = Color.OrangeRed;//17.9
+            //}
+            //else if (ZuKang > 340)
+            //{
+            //    Param_Button.BackColor = Color.DarkOrange;//16.8
+            //}
+            //else if (ZuKang > 310)
+            //{
+            //    Param_Button.BackColor = Color.Sienna;//15.7
+            //}
+            //else if (ZuKang > 280)
+            //{
+            //    Param_Button.BackColor = Color.Khaki;//14.6
+            //}
+            //else if (ZuKang > 250)
+            //{
+            //    Param_Button.BackColor = Color.Yellow;//13.6
+            //}
+            //else if (ZuKang > 220)
+            //{
+            //    Param_Button.BackColor = Color.GreenYellow;//12.5
+            //}
+            //else if (ZuKang > 190)
+            //{
+            //    Param_Button.BackColor = Color.Green;//11.4
+            //}
+            //else if (ZuKang > 160)
+            //{
+            //    Param_Button.BackColor = Color.DarkGreen;//10.4
+            //}
+            //else if (ZuKang > 130)
+            //{
+            //    Param_Button.BackColor = Color.SkyBlue;//9.3
+            //}
+            //else if (ZuKang > 100)
+            //{
+            //    Param_Button.BackColor = Color.DarkTurquoise;//8.2
+            //}
+            //else if (ZuKang > 70)
+            //{
+            //    Param_Button.BackColor = Color.DeepSkyBlue;//7.1
+            //}
+            //else if (ZuKang > 40)
+            //{
+            //    Param_Button.BackColor = Color.Blue;//6
+            //}
+            //else
+            //{
+            //    Param_Button.BackColor = Color.MidnightBlue;//5
+            //}
         }
 
         private void InitChart()
@@ -1174,11 +1224,13 @@ namespace EEG
                     buf_Xiu[2] = Convert.ToByte('0');
                     ChangeModeFlag_Int = 0;
                     My_TabControl.SelectTab(0);
+                    Timer_ThreadingTimer.Change(0, 100);//更改刷新时间，100毫秒一刷新
                     break;//输入模式
                 case "1":
                     buf_Xiu[2] = Convert.ToByte('1');
                     ChangeModeFlag_Int = 1;
                     My_TabControl.SelectTab(1);
+                    Timer_ThreadingTimer.Change(0, 500);//更改刷新时间，500毫秒一刷新
                     break;//阻抗检测
             }
 
@@ -1331,7 +1383,7 @@ namespace EEG
             buf_Xiu[5] = FangDa_FenBie[flag_Test][1];
             buf_Xiu[4] = FangDa_FenBie[flag_Test][2];
 
-            System.Diagnostics.Debug.WriteLine("XiuGai {0} {1} {2}", buf_Xiu[2], buf_Xiu[5], buf_Xiu[4]);
+            //System.Diagnostics.Debug.WriteLine("XiuGai {0} {1} {2}", buf_Xiu[2], buf_Xiu[5], buf_Xiu[4]);
             if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
                 MessageBox.Show("error", "修改放大倍数失败");
 
@@ -1387,7 +1439,7 @@ namespace EEG
             //    timer1.Stop();
             //}
             saveBegin_Button_Click(this, null);//第二次调用停止保存
-            System.Diagnostics.Debug.WriteLine("timer over");
+            //System.Diagnostics.Debug.WriteLine("timer over");
             timer1.Stop();
             DingShiSave_Button.Text = "定时保存";
             save_button_Click(this, null);
@@ -1459,7 +1511,7 @@ namespace EEG
             buf_Xiu[5] = (byte)((BeiShu % 2) * 128 + BeiShu * 16 + BeiShu * 2 + (BeiShu / 4));
             buf_Xiu[4] = (byte)((BeiShu % 4) * 64 + BeiShu * 8 + BeiShu);
 
-            System.Diagnostics.Debug.WriteLine("{0} {1} {2}", buf_Xiu[2], buf_Xiu[4], buf_Xiu[4]);
+            //System.Diagnostics.Debug.WriteLine("{0} {1} {2}", buf_Xiu[2], buf_Xiu[4], buf_Xiu[4]);
 
             if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
                 MessageBox.Show("error", "修改采样率失败");

@@ -30,6 +30,7 @@ namespace EEG
         bool SaveFileBeginOrNot = true;
         bool recThread_Flag = false;
         bool Flag_recQueue_Save = false;
+        bool Flag_recQueue_Save_DingZu = false;
         bool Flag__DisplayChart_ThreadingTimer__ReturnChart_Button_Click = false;//刷新chart控件
         bool test_FIR_ttt = false;
         bool[] SelectChanel = null;
@@ -70,6 +71,7 @@ namespace EEG
         //ComboBox[] comboBox_Array = null;
 
         Stopwatch stopwatch_test = null;
+        Stopwatch stopwatch_DingZu = new Stopwatch();
         Stopwatch DingShiSave_StopWatch = null;
         List<double> add_List = null;
         List<byte> Trans_ByteArray = null;
@@ -321,7 +323,7 @@ namespace EEG
                     }
                     catch
                     {
-                        recThread_Flag = false;
+                        //recThread_Flag = false;//不知道为什么，加了DingZuSaveShuju函数之后总会catch到错误，推测可能是函数内部计算部规范
                     }
                 }
                 else
@@ -694,7 +696,7 @@ namespace EEG
                 this.Invoke(action, true);
             }
 
-            System.Diagnostics.Debug.WriteLine("display {0}", stopwatch_test.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("display {0}", stopwatch_test.ElapsedMilliseconds);
             stopwatch_test.Reset();
         }
 
@@ -850,6 +852,8 @@ namespace EEG
                 Flag__DisplayChart_ThreadingTimer__ReturnChart_Button_Click = true;
 
                 ClearFangDa_Button_Click(this, null);//保证每次上位机开启时下位机的放大倍数为1
+
+                //stopwatch_DingZu.Restart();//定
             }
             else
             {
@@ -938,7 +942,7 @@ namespace EEG
                 }
                 jishu_rem_SaveFile.Add((temp_listbyte.Count - 128 + jishu_rem_SaveFile[0]));
 
-                if (jishu_rem_SaveFile.Count != 2)
+                if (jishu_rem_SaveFile.Count != 2)//如果有断层，直接停止保存
                 {
                     MessageBox.Show("error", "断层");
                     return;
@@ -977,7 +981,8 @@ namespace EEG
 
 
                 StringBuilder temp_StringBuilder = new StringBuilder();
-                for (int j = jishu_rem_SaveFile[0]; j < jishu_rem_SaveFile[1]; j++)
+                //for (int j = jishu_rem_SaveFile[0]; j < jishu_rem_SaveFile[1]; j++)
+                for (int j = jishu_rem_SaveFile[0]; j < jishu_rem_SaveFile[1] + 128; j++)//因为之前会出现断层，按照以前的算法会莫明其妙的少载入一组，现在把这组填回来。PS:但凡能到达这里就说明没有断层
                 {
                     temp_StringBuilder.AppendFormat("{0:X2}" + " ", temp_listbyte[j]);
                 }
@@ -1543,16 +1548,25 @@ namespace EEG
         {
             if (DingZu_TextBox.Text == "")
                 return;
-            DingZuValue = (int)(System.Convert.ToDouble(DingZu_TextBox.Text) * 1000);
+            DingZuSave_Button.Text = "正在保存";
+            Flag_recQueue_Save_DingZu = true;
+            string temp_str = string.Format("{0:N1}", System.Convert.ToDouble(DingZu_TextBox.Text));
+            DingZuValue = (int)(System.Convert.ToDouble(temp_str) * 1000);
             recQueue_Save = new ConcurrentQueue<byte[]>();//清除上一次的数据，确保队列为空
         }
 
         public void DingZuSaveShuju(byte[] buf)
         {
-            while (DingZuValue > 0)
+            if (DingZuValue > 0)
             {
                 recQueue_Save.Enqueue(buf);
                 DingZuValue -= 4;
+            }
+            else if (Flag_recQueue_Save_DingZu)
+            {
+                MessageBox.Show("定组保存", "定组保存完成");
+                Flag_recQueue_Save_DingZu = false;
+                DingZuSave_Button.Text = "定组保存";
             }
         }
     }

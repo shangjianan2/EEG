@@ -66,6 +66,7 @@ namespace EEG
         Circle_Array<double>[] FIR_Circle_Array = null;
 
         System.Threading.Timer Timer_ThreadingTimer = null;
+        //System.Threading.Timer Timer_ThreadingTimer_DingZu = null;
 
         Series[] serial_ch = null;
         //ComboBox[] comboBox_Array = null;
@@ -105,7 +106,7 @@ namespace EEG
             if (MyDevice == null)
                 start_button.Enabled = false;
 
-            Timer_ThreadingTimer = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer), null, 1000, 100);
+            Timer_ThreadingTimer = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer), null, 1000, 100);            
 
             Init_ChanelListView();
 
@@ -168,6 +169,9 @@ namespace EEG
             {
                 PianXuanPian_ComboBox.Items.Add((i + 1).ToString());
             }
+
+            //失能“定组保存”
+            //DingZuSave_Button.Enabled = false;
         }
 
         private void Initialize()
@@ -570,7 +574,6 @@ namespace EEG
         {
             double sum = 0.0;
             //y = new List<double>();
-            //stopwatch_test.Restart();
             for (int i = h.Count; i < x.Count; i++)
             {
                 sum = 0.0;
@@ -582,8 +585,6 @@ namespace EEG
 
                 y.Add(sum);
             }
-            //System.Diagnostics.Debug.WriteLine("fir {0}", stopwatch_test.ElapsedMilliseconds);
-            //stopwatch_test.Reset();
         }
 
 
@@ -595,7 +596,6 @@ namespace EEG
             if (Flag__DisplayChart_ThreadingTimer__ReturnChart_Button_Click == false)
                 return;
 
-            stopwatch_test.Restart();
 
             if(ChangeModeFlag_Int == 0)//输入模式
             {
@@ -695,9 +695,15 @@ namespace EEG
                 };
                 this.Invoke(action, true);
             }
+        }
 
-            //System.Diagnostics.Debug.WriteLine("display {0}", stopwatch_test.ElapsedMilliseconds);
-            stopwatch_test.Reset();
+        void DisplayChart_ThreadingTimer_DingZu(object state)
+        {
+            Action<bool> action = (x) =>
+            {
+                DingZuSave_Button.Enabled = true;
+            };
+            this.Invoke(action, true);
         }
 
         void Change_ButtonColor(ref Button Param_Button, double ZuKang)
@@ -853,7 +859,8 @@ namespace EEG
 
                 ClearFangDa_Button_Click(this, null);//保证每次上位机开启时下位机的放大倍数为1
 
-                //stopwatch_DingZu.Restart();//定
+                //链接设备两秒后可以使用“定组保存”
+                //Timer_ThreadingTimer_DingZu = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer_DingZu), null, 2000, 0);
             }
             else
             {
@@ -874,6 +881,9 @@ namespace EEG
                     recThread_Flag = false;
 
                 Flag__DisplayChart_ThreadingTimer__ReturnChart_Button_Click = false;
+
+                //断开连接时，立刻失能“定组保存”
+                //DingZuSave_Button.Enabled = false;
             }
         }
 
@@ -944,7 +954,10 @@ namespace EEG
 
                 if (jishu_rem_SaveFile.Count != 2)//如果有断层，直接停止保存
                 {
-                    MessageBox.Show("error", "断层");
+                    int[] duanceng = new int[2];
+                    duanceng[0] = temp_listbyte[jishu_rem_SaveFile[1] + 4]*65536 + temp_listbyte[jishu_rem_SaveFile[1] + 5]*256 + temp_listbyte[jishu_rem_SaveFile[1] + 6];
+                    duanceng[1] = temp_listbyte[jishu_rem_SaveFile[2] + 4] * 65536 + temp_listbyte[jishu_rem_SaveFile[2] + 5] * 256 + temp_listbyte[jishu_rem_SaveFile[2] + 6];
+                    MessageBox.Show(duanceng[0].ToString() + " " + duanceng[1].ToString(), "断层");
                     return;
                 }
 
@@ -1545,25 +1558,33 @@ namespace EEG
         }
 
         private void DingZuSave_Button_Click(object sender, EventArgs e)
-        {
+        {            
             if (DingZu_TextBox.Text == "")
                 return;
-            DingZuSave_Button.Text = "正在保存";
-            Flag_recQueue_Save_DingZu = true;
             string temp_str = string.Format("{0:N1}", System.Convert.ToDouble(DingZu_TextBox.Text));
-            DingZuValue = (int)(System.Convert.ToDouble(temp_str) * 1000);
+            DingZuValue = (int)(System.Convert.ToDouble(temp_str) * 1000 / 4);
+            DingZuSave_Button.Text = "正在保存";
+            Flag_recQueue_Save_DingZu = true;            
             recQueue_Save = new ConcurrentQueue<byte[]>();//清除上一次的数据，确保队列为空
+            stopwatch_test.Restart();
         }
 
         public void DingZuSaveShuju(byte[] buf)
         {
-            if (DingZuValue > 0)
+            if (Flag_recQueue_Save_DingZu == false)
+                return;
+            if (DingZuValue > recQueue_Save.Count)
             {
                 recQueue_Save.Enqueue(buf);
-                DingZuValue -= 4;
+                
+                //DingZuValue -= 4;
             }
-            else if (Flag_recQueue_Save_DingZu)
+            //else if (Flag_recQueue_Save_DingZu)
+            else
             {
+                long temp_stopwatch = stopwatch_test.ElapsedMilliseconds;
+                System.Diagnostics.Debug.WriteLine("DingZu: {0}", temp_stopwatch);
+                stopwatch_test.Reset();
                 MessageBox.Show("定组保存", "定组保存完成");
                 Flag_recQueue_Save_DingZu = false;
                 DingZuSave_Button.Text = "定组保存";

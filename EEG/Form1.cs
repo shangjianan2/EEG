@@ -54,6 +54,7 @@ namespace EEG
         double[] maxValue = new double[41];//阻抗模式中电压最大值
         double[] minValue = new double[41];//阻抗模式中电压最小值
         double[] youxiaoValue = new double[41];//有效值
+        int DingZuValue = 0;//具体的组数是通过时间计算的，此变量乘1000
 
         ConcurrentQueue<byte[]> recQueue_test = null;
         ConcurrentQueue<byte[]> recQueue_Save = null;
@@ -312,10 +313,11 @@ namespace EEG
                         MyDevice.BulkInEndPt.XferData(ref buf, ref len);
 
                         recQueue_test.Enqueue((byte[])buf);//为了显示，会动态增加减少
-                        if (Flag_recQueue_Save == true)
+                        if (Flag_recQueue_Save == true)//普通记录数据和定时记录数据
                         {
                             recQueue_Save.Enqueue((byte[])buf);
                         }
+                        DingZuSaveShuju((byte[])buf);//定组保存
                     }
                     catch
                     {
@@ -1534,6 +1536,23 @@ namespace EEG
             for(int i = 0; i < 8; i++)
             {
                 lvi_Array[(PianNum - 1) * 8 + i].SubItems[3].Text = PianXuanBeiShu_ComboBox.Text;
+            }
+        }
+
+        private void DingZuSave_Button_Click(object sender, EventArgs e)
+        {
+            if (DingZu_TextBox.Text == "")
+                return;
+            DingZuValue = (int)(System.Convert.ToDouble(DingZu_TextBox.Text) * 1000);
+            recQueue_Save = new ConcurrentQueue<byte[]>();//清除上一次的数据，确保队列为空
+        }
+
+        public void DingZuSaveShuju(byte[] buf)
+        {
+            while (DingZuValue > 0)
+            {
+                recQueue_Save.Enqueue(buf);
+                DingZuValue -= 4;
             }
         }
     }

@@ -118,6 +118,8 @@
             this.PianXuFangDa_Button = new System.Windows.Forms.Button();
             this.PianXuanPian_ComboBox = new System.Windows.Forms.ComboBox();
             this.PianXuanBeiShu_ComboBox = new System.Windows.Forms.ComboBox();
+            this.DingZuSave_Button = new System.Windows.Forms.Button();
+            this.DingZu_TextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -980,11 +982,30 @@
             this.PianXuanBeiShu_ComboBox.TabIndex = 44;
             this.PianXuanBeiShu_ComboBox.Text = "1";
             // 
+            // DingZuSave_Button
+            // 
+            this.DingZuSave_Button.Location = new System.Drawing.Point(288, 99);
+            this.DingZuSave_Button.Name = "DingZuSave_Button";
+            this.DingZuSave_Button.Size = new System.Drawing.Size(75, 23);
+            this.DingZuSave_Button.TabIndex = 46;
+            this.DingZuSave_Button.Text = "定组保存";
+            this.DingZuSave_Button.UseVisualStyleBackColor = true;
+            this.DingZuSave_Button.Click += new System.EventHandler(this.DingZuSave_Button_Click);
+            // 
+            // DingZu_TextBox
+            // 
+            this.DingZu_TextBox.Location = new System.Drawing.Point(271, 129);
+            this.DingZu_TextBox.Name = "DingZu_TextBox";
+            this.DingZu_TextBox.Size = new System.Drawing.Size(100, 21);
+            this.DingZu_TextBox.TabIndex = 47;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 602);
+            this.Controls.Add(this.DingZu_TextBox);
+            this.Controls.Add(this.DingZuSave_Button);
             this.Controls.Add(this.PianXuanPian_ComboBox);
             this.Controls.Add(this.PianXuanBeiShu_ComboBox);
             this.Controls.Add(this.PianXuFangDa_Button);
@@ -1020,6 +1041,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Flash_PictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1111,6 +1133,8 @@
         private System.Windows.Forms.Button PianXuFangDa_Button;
         private System.Windows.Forms.ComboBox PianXuanPian_ComboBox;
         private System.Windows.Forms.ComboBox PianXuanBeiShu_ComboBox;
+        private System.Windows.Forms.Button DingZuSave_Button;
+        private System.Windows.Forms.TextBox DingZu_TextBox;
     }
 }
 

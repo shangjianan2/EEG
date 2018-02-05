@@ -715,10 +715,13 @@ namespace EEG
                 {
                     chart1.Series.Clear();
                     serial_ch[1].Points.Clear();
-                    //byte temp_byte = 0;
+                    int temp_int = 0;
                     for (int i = 0; i < 1000; i++ )
                     {
-                        serial_ch[1].Points.AddY(circlebuffer.Circle_Array_T[i * 128 + 7] * 65536 + circlebuffer.Circle_Array_T[i * 128 + 8] * 256 + circlebuffer.Circle_Array_T[i * 128 + 9]);
+                        temp_int = (circlebuffer.Circle_Array_T[i * 128 + 7] * 65536 + circlebuffer.Circle_Array_T[i * 128 + 8] * 256 + circlebuffer.Circle_Array_T[i * 128 + 9]);
+                        temp_int = (temp_int > 8388608) ? (temp_int - 16777216) : (temp_int);
+                        //serial_ch[1].Points.AddY(circlebuffer.Circle_Array_T[i * 128 + 7] * 65536 + circlebuffer.Circle_Array_T[i * 128 + 8] * 256 + circlebuffer.Circle_Array_T[i * 128 + 9]);
+                        serial_ch[1].Points.AddY(temp_int);
                     }
                     chart1.Series.Add(serial_ch[1]);
                 };

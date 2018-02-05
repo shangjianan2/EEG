@@ -324,10 +324,29 @@ namespace EEG
                             recQueue_Save.Enqueue((byte[])buf);
                         }
                         DingZuSaveShuju((byte[])buf);//定组保存
+                        //if (Flag_recQueue_Save_DingZu == false)
+                        //    continue;
+                        //if (DingZuValue > recQueue_Save.Count)
+                        //{
+                        //    recQueue_Save.Enqueue(buf);
+
+                        //    //DingZuValue -= 4;
+                        //}
+                        ////else if (Flag_recQueue_Save_DingZu)
+                        //else
+                        //{
+                        //    long temp_stopwatch = stopwatch_test.ElapsedMilliseconds;
+                        //    System.Diagnostics.Debug.WriteLine("DingZu: {0}", temp_stopwatch);
+                        //    stopwatch_test.Reset();
+                            
+                        //    Flag_recQueue_Save_DingZu = false;
+                        //    //MessageBox.Show("定组保存", "定组保存完成");
+                        //    //DingZuSave_Button.Text = "定组保存";
+                        //}
                     }
                     catch
                     {
-                        //recThread_Flag = false;//不知道为什么，加了DingZuSaveShuju函数之后总会catch到错误，推测可能是函数内部计算部规范
+                        recThread_Flag = false;//不知道为什么，加了DingZuSaveShuju函数之后总会catch到错误，推测可能是函数内部计算部规范
                     }
                 }
                 else
@@ -1584,10 +1603,15 @@ namespace EEG
             {
                 long temp_stopwatch = stopwatch_test.ElapsedMilliseconds;
                 System.Diagnostics.Debug.WriteLine("DingZu: {0}", temp_stopwatch);
-                stopwatch_test.Reset();
-                MessageBox.Show("定组保存", "定组保存完成");
+                stopwatch_test.Reset();                
                 Flag_recQueue_Save_DingZu = false;
-                DingZuSave_Button.Text = "定组保存";
+                
+                Action<bool> action = (x) =>
+                {
+                    MessageBox.Show("定组保存", "定组保存完成");
+                    DingZuSave_Button.Text = "定组保存";
+                };
+                this.Invoke(action, true);
             }
         }
     }

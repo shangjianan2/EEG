@@ -106,7 +106,8 @@ namespace EEG
             if (MyDevice == null)
                 start_button.Enabled = false;
 
-            Timer_ThreadingTimer = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer), null, 1000, 100);            
+            //Timer_ThreadingTimer = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer), null, 1000, 100);
+            Timer_ThreadingTimer = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer2), null, 1000, 100);
 
             Init_ChanelListView();
 
@@ -324,25 +325,6 @@ namespace EEG
                             recQueue_Save.Enqueue((byte[])buf);
                         }
                         DingZuSaveShuju((byte[])buf);//定组保存
-                        //if (Flag_recQueue_Save_DingZu == false)
-                        //    continue;
-                        //if (DingZuValue > recQueue_Save.Count)
-                        //{
-                        //    recQueue_Save.Enqueue(buf);
-
-                        //    //DingZuValue -= 4;
-                        //}
-                        ////else if (Flag_recQueue_Save_DingZu)
-                        //else
-                        //{
-                        //    long temp_stopwatch = stopwatch_test.ElapsedMilliseconds;
-                        //    System.Diagnostics.Debug.WriteLine("DingZu: {0}", temp_stopwatch);
-                        //    stopwatch_test.Reset();
-                            
-                        //    Flag_recQueue_Save_DingZu = false;
-                        //    //MessageBox.Show("定组保存", "定组保存完成");
-                        //    //DingZuSave_Button.Text = "定组保存";
-                        //}
                     }
                     catch
                     {
@@ -713,6 +695,91 @@ namespace EEG
                     }
                 };
                 this.Invoke(action, true);
+            }
+        }
+
+        /*
+         * 将数据显示在chart控件上
+         */
+        void DisplayChart_ThreadingTimer2(object state)
+        {
+            if (Flag__DisplayChart_ThreadingTimer__ReturnChart_Button_Click == false)
+                return;
+
+
+            if (ChangeModeFlag_Int == 0)//输入模式
+            {
+                JieXiShuJu_tt2(ref recQueue_test, SelectChanel);
+
+                Action<bool> action = (x) =>
+                {
+                    chart1.Series.Clear();
+                    serial_ch[1].Points.Clear();
+                    //byte temp_byte = 0;
+                    for (int i = 0; i < 1000; i++ )
+                    {
+                        serial_ch[1].Points.AddY(circlebuffer.Circle_Array_T[i * 128 + 7] * 65536 + circlebuffer.Circle_Array_T[i * 128 + 8] * 256 + circlebuffer.Circle_Array_T[i * 128 + 9]);
+                    }
+                    chart1.Series.Add(serial_ch[1]);
+                };
+                this.Invoke(action, true);
+            }
+            else//阻抗模式
+            {
+                //为最大值和最小值赋初值
+                for (int i = 0; i < TongDaoShu - 1; i++)
+                {
+                    maxValue[i] = 0;
+                    minValue[i] = 1000;
+                }
+
+                if (test_FIR_ttt == false)
+                    //JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
+                    JieXiShuJu_tt(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
+                else
+                    //JieXiLvBoShuJu(ref recQueue_test, ref FIR_h, ref erweishuzu_Circle_Array, SelectChanel);
+                    JieXiLvBoShuJu_tt(ref recQueue_test, ref FIR_h, ref erweishuzu_Circle_Array, SelectChanel);
+
+                int temp_Index = erweishuzu_Circle_Array[1].Index_Array_Save;
+
+                Action<bool> action = (x) =>
+                {
+                    for (int j = 0; j < 40; j++)
+                    {
+                        temp_Index = erweishuzu_Circle_Array[j + 1].Index_Array_Save;
+                        for (int i = 0; i < 500; i++)//500组数据对应500毫秒
+                        {
+                            //serial_ch[j].Points.AddXY(i, (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index) + j * 1000) * 4.5 / 8388607.0);
+                            //获取每个通道的最小值
+                            maxValue[j] = (maxValue[j] < (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) ? (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) : maxValue[j]);
+                            minValue[j] = (minValue[j] > (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) ? (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) : minValue[j]);
+                        }
+                        youxiaoValue[j + 1] = (maxValue[j] - minValue[j]) * 0.70710678 * 4.5 / 8388607.0;
+                    }
+
+                    for (int i = 1; i <= 32; i++)
+                    {
+                        Change_ButtonColor(ref Array_Button[i], youxiaoValue[i]);
+                    }
+                    for (int i = 37; i <= 40; i++)
+                    {
+                        Change_ButtonColor(ref Array_Button[i], youxiaoValue[i]);
+                    }
+                };
+                this.Invoke(action, true);
+            }
+        }
+
+        Circle_Array2<byte> circlebuffer = new Circle_Array2<byte>(128000);//构造一个环形缓冲区
+        void JieXiShuJu_tt2(ref ConcurrentQueue<byte[]> reQ, bool[] selectchanel)
+        {
+            int reQ_Size = reQ.Count;//记录此刻队列中有多少数据
+            byte[] temp_ByteArray = new byte[512];
+            
+            for (int i = 0; i < reQ_Size; i++)//还是应该把数据先取出来，直接放到serier里不太好，鲁棒性不强，因为出列的数据就永远消失了
+            {
+                reQ.TryDequeue(out temp_ByteArray);
+                circlebuffer.AddRange(temp_ByteArray, 512);
             }
         }
 
@@ -1659,6 +1726,55 @@ namespace EEG
             {
                 return Circle_Array_T[(index - 1)];
             }
+        }
+    }
+
+    class Circle_Array2<T>//专为环形缓冲区设计的类
+    {
+        public T[] Circle_Array_T = null;//实际数据的存放位置
+        public int Index_Array_Save = 0;//当前存储的索引，相当于head
+        public int length = 0;//循环数组的长度
+        public int Index_Array_Read = 0;//读取位置的索引，相当于tail
+        public int count = 0; //尽量避免多线程访问这个变量，因为这个变量主要的用途是环形缓冲区，是先存储，在读取，不涉及多线程，所以没事
+
+        public Circle_Array2(int length_param)
+        {
+            length = length_param;
+            Circle_Array_T = new T[length];
+        }
+
+        public void AddRange(T[] param_int_Array, int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                Circle_Array_T[Index_Array_Save] = param_int_Array[i];
+                Index_Array_Save++;
+                if (Index_Array_Save >= length)
+                    Index_Array_Save = 0;
+            }
+            count += size;
+        }
+        public bool Circle_Read(ref T shuju)
+        {
+            //index++;
+            //if (index >= length)
+            //{
+            //    index = 0;
+            //    return Circle_Array_T[length - 1];//最后一个数据
+            //}
+            //else
+            //{
+            //    return Circle_Array_T[(index - 1)];
+            //}
+            if (count <= 128)//让缓存区中始终有一组，这里这个128是特别设定的，并不适用于其他情况
+                return false;
+            shuju = Circle_Array_T[Index_Array_Save];
+            count--;
+            Index_Array_Save++;
+            if (Index_Array_Save >= length)
+                Index_Array_Save = 0;
+
+            return true;
         }
     }
 }

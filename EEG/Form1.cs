@@ -1422,7 +1422,7 @@ namespace EEG
             //buf_Xiu[5] = FangDa_FenBie[flag_Test][1];
             //buf_Xiu[4] = FangDa_FenBie[flag_Test][2];
 
-            //System.Diagnostics.Debug.WriteLine("XiuGai {0} {1} {2}", buf_Xiu[2], buf_Xiu[5], buf_Xiu[4]);
+            System.Diagnostics.Debug.WriteLine("XiuGai {0} {1} {2}", buf_Xiu[2], buf_Xiu[5], buf_Xiu[4]);
             if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
                 MessageBox.Show("error", "修改放大倍数失败");
 

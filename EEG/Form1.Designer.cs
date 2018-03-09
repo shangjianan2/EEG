@@ -120,6 +120,8 @@
             this.PianXuanBeiShu_ComboBox = new System.Windows.Forms.ComboBox();
             this.DingZuSave_Button = new System.Windows.Forms.Button();
             this.DingZu_TextBox = new System.Windows.Forms.TextBox();
+            this.TongShiFangDa_Button = new System.Windows.Forms.Button();
+            this.TongShiFangDa_ComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -191,9 +193,9 @@
             // 
             // Chanel_ListView
             // 
-            this.Chanel_ListView.Location = new System.Drawing.Point(12, 215);
+            this.Chanel_ListView.Location = new System.Drawing.Point(12, 263);
             this.Chanel_ListView.Name = "Chanel_ListView";
-            this.Chanel_ListView.Size = new System.Drawing.Size(293, 375);
+            this.Chanel_ListView.Size = new System.Drawing.Size(293, 327);
             this.Chanel_ListView.TabIndex = 23;
             this.Chanel_ListView.UseCompatibleStateImageBehavior = false;
             this.Chanel_ListView.View = System.Windows.Forms.View.Details;
@@ -999,11 +1001,32 @@
             this.DingZu_TextBox.Size = new System.Drawing.Size(100, 21);
             this.DingZu_TextBox.TabIndex = 47;
             // 
+            // TongShiFangDa_Button
+            // 
+            this.TongShiFangDa_Button.Location = new System.Drawing.Point(136, 207);
+            this.TongShiFangDa_Button.Name = "TongShiFangDa_Button";
+            this.TongShiFangDa_Button.Size = new System.Drawing.Size(75, 23);
+            this.TongShiFangDa_Button.TabIndex = 48;
+            this.TongShiFangDa_Button.Text = "修改放大倍数";
+            this.TongShiFangDa_Button.UseVisualStyleBackColor = true;
+            this.TongShiFangDa_Button.Click += new System.EventHandler(this.TongShiFangDa_Button_Click);
+            // 
+            // TongShiFangDa_ComboBox
+            // 
+            this.TongShiFangDa_ComboBox.FormattingEnabled = true;
+            this.TongShiFangDa_ComboBox.Location = new System.Drawing.Point(217, 210);
+            this.TongShiFangDa_ComboBox.Name = "TongShiFangDa_ComboBox";
+            this.TongShiFangDa_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.TongShiFangDa_ComboBox.TabIndex = 49;
+            this.TongShiFangDa_ComboBox.Text = "1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 602);
+            this.Controls.Add(this.TongShiFangDa_ComboBox);
+            this.Controls.Add(this.TongShiFangDa_Button);
             this.Controls.Add(this.DingZu_TextBox);
             this.Controls.Add(this.DingZuSave_Button);
             this.Controls.Add(this.PianXuanPian_ComboBox);
@@ -1135,6 +1158,8 @@
         private System.Windows.Forms.ComboBox PianXuanBeiShu_ComboBox;
         private System.Windows.Forms.Button DingZuSave_Button;
         private System.Windows.Forms.TextBox DingZu_TextBox;
+        private System.Windows.Forms.Button TongShiFangDa_Button;
+        private System.Windows.Forms.ComboBox TongShiFangDa_ComboBox;
     }
 }
 

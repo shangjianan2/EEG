@@ -1291,16 +1291,16 @@ namespace EEG
             buf_Xiu[4] = Convert.ToByte('D');
             buf_Xiu[5] = Convert.ToByte('E');
 
-            switch (XiuGaiBeiShu_ComboBox.Text)
-            {
-                case "1": buf_Xiu[2] = Convert.ToByte('0'); break;
-                case "2": buf_Xiu[2] = Convert.ToByte('1'); break;
-                case "4": buf_Xiu[2] = Convert.ToByte('2'); break;
-                case "6": buf_Xiu[2] = Convert.ToByte('3'); break;
-                case "8": buf_Xiu[2] = Convert.ToByte('4'); break;
-                case "12": buf_Xiu[2] = Convert.ToByte('5'); break;
-                case "24": buf_Xiu[2] = Convert.ToByte('6'); break;
-            }
+            //switch (XiuGaiBeiShu_ComboBox.Text)
+            //{
+            //    case "1": buf_Xiu[2] = Convert.ToByte('0'); break;
+            //    case "2": buf_Xiu[2] = Convert.ToByte('1'); break;
+            //    case "4": buf_Xiu[2] = Convert.ToByte('2'); break;
+            //    case "6": buf_Xiu[2] = Convert.ToByte('3'); break;
+            //    case "8": buf_Xiu[2] = Convert.ToByte('4'); break;
+            //    case "12": buf_Xiu[2] = Convert.ToByte('5'); break;
+            //    case "24": buf_Xiu[2] = Convert.ToByte('6'); break;
+            //}
             for (int i = 0; i < 8; i++)
             {
                 //temp_Byte[i] = Convert.ToByte(comboBox_Array[i].Text);
@@ -1319,108 +1319,55 @@ namespace EEG
             buf_Xiu[5] = (byte)((temp_Byte[2] % 2) * 128 + temp_Byte[3] * 16 + temp_Byte[4] * 2 + temp_Byte[5] / 4);
             buf_Xiu[4] = (byte)((temp_Byte[5] % 4) * 64 + temp_Byte[6] * 8 + temp_Byte[7]);
 
-            //if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
-            //    MessageBox.Show("error", "修改放大倍数失败");
-            //if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
-            //    MessageBox.Show("error", "修改放大倍数失败");
+            System.Diagnostics.Debug.WriteLine("XiuGai {0} {1} {2}", buf_Xiu[2], buf_Xiu[5], buf_Xiu[4]);
+            if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
+                MessageBox.Show("error", "修改放大倍数失败");
 
-            
-            //注意“XiuGaiBeiShu1_ComboBox”和“XiuGaiBeiShu_ComboBox”不是一个玩意
-            //int temp_DiJiLu = Convert.ToInt16(XiuGaiBeiShu1_ComboBox.Text);
-            //int flag_Test = 0;
-            //if (temp_DiJiLu <= 8)
-            //{
-            //    buf_Xiu[3] = Convert.ToByte('G');
-            //    flag_Test = 0;
-            //}
-            //else if(temp_DiJiLu <= 16)
-            //{
-            //    buf_Xiu[3] = Convert.ToByte('H');
-            //    flag_Test = 1;
-            //}
-            //else if(temp_DiJiLu <= 24)
-            //{
-            //    buf_Xiu[3] = Convert.ToByte('I');
-            //    flag_Test = 2;
-            //}
-            //else if(temp_DiJiLu <= 32)
-            //{
-            //    buf_Xiu[3] = Convert.ToByte('J');
-            //    flag_Test = 3;
-            //}
-            //else
-            //{
-            //    buf_Xiu[3] = Convert.ToByte('K');
-            //    flag_Test = 4;
-            //}
+            Thread.Sleep(100);
 
-            //int temp_8 = (temp_DiJiLu - 1) % 8;
-            //int temp_88 = Convert.ToInt16(XiuGaiBeiShu_ComboBox.Text);
+            if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
+                MessageBox.Show("error", "修改放大倍数失败");
+        }
 
-            //lvi_Array[(temp_DiJiLu - 1)].SubItems[3].Text = temp_88.ToString();
-            ////buf_Xiu[2] = (byte)(temp_88 / 65536);
-            ////buf_Xiu[5] = (byte)(temp_88 % 65536 / 256);
-            ////buf_Xiu[4] = (byte)(temp_88 % 256);
+        private void TongShiFangDa_Button_Click(object sender, EventArgs e)
+        {
+            int len_Xiu = 6;
+            byte[] buf_Xiu = new byte[len_Xiu];
+            byte[] temp_Byte = new byte[8];
+            buf_Xiu[0] = Convert.ToByte('T');
+            buf_Xiu[1] = Convert.ToByte('S');
+            //buf_Xiu[2] = Convert.ToByte((string)XiuGaiBeiShu_ComboBox.Text);
+            buf_Xiu[3] = Convert.ToByte('G');
+            buf_Xiu[4] = Convert.ToByte('D');
+            buf_Xiu[5] = Convert.ToByte('E');
 
-            //switch(temp_88)
+            //switch (XiuGaiBeiShu_ComboBox.Text)
             //{
-            //    case 1: temp_88 = 0; break;
-            //    case 2: temp_88 = 1; break;
-            //    case 4: temp_88 = 2; break;
-            //    case 6: temp_88 = 3; break;
-            //    case 8: temp_88 = 4; break;
-            //    case 12: temp_88 = 5; break;
-            //    case 24: temp_88 = 6; break;
+            //    case "1": buf_Xiu[2] = Convert.ToByte('0'); break;
+            //    case "2": buf_Xiu[2] = Convert.ToByte('1'); break;
+            //    case "4": buf_Xiu[2] = Convert.ToByte('2'); break;
+            //    case "6": buf_Xiu[2] = Convert.ToByte('3'); break;
+            //    case "8": buf_Xiu[2] = Convert.ToByte('4'); break;
+            //    case "12": buf_Xiu[2] = Convert.ToByte('5'); break;
+            //    case "24": buf_Xiu[2] = Convert.ToByte('6'); break;
             //}
-
-            //if(temp_8 == 7)
-            //{
-            //    FangDa_FenBie[flag_Test][2] &= 248;
-            //    FangDa_FenBie[flag_Test][2] |= (byte)(temp_88);
-            //}
-            //else if(temp_8 == 6)
-            //{
-            //    FangDa_FenBie[flag_Test][2] &= 199;
-            //    FangDa_FenBie[flag_Test][2] |= (byte)(temp_88 << 3);
-            //}
-            //else if(temp_8 == 5)
-            //{
-            //    FangDa_FenBie[flag_Test][2] &= 63;
-            //    FangDa_FenBie[flag_Test][1] &= 254;
-            //    FangDa_FenBie[flag_Test][2] |= (byte)((temp_88 % 4) << 6);
-            //    FangDa_FenBie[flag_Test][1] |= (byte)((temp_88 / 4));
-            //}
-            //else if(temp_8 == 4)
-            //{
-            //    FangDa_FenBie[flag_Test][1] &= 241;
-            //    FangDa_FenBie[flag_Test][1] |= (byte)(temp_88 << 1);
-            //}
-            //else if(temp_8 == 3)
-            //{
-            //    FangDa_FenBie[flag_Test][1] &= 143;
-            //    FangDa_FenBie[flag_Test][1] |= (byte)(temp_88 << 4);
-            //}
-            //else if(temp_8 == 2)
-            //{
-            //    FangDa_FenBie[flag_Test][1] &= 127;
-            //    FangDa_FenBie[flag_Test][0] &= 252;
-            //    FangDa_FenBie[flag_Test][1] |= (byte)((temp_88 % 2) << 7);
-            //    FangDa_FenBie[flag_Test][0] |= (byte)((temp_88 / 2));
-            //}
-            //else if(temp_8 == 1)
-            //{
-            //    FangDa_FenBie[flag_Test][0] &= 227;
-            //    FangDa_FenBie[flag_Test][0] |= (byte)(temp_88 << 2);
-            //}
-            //else if(temp_8 == 0)
-            //{
-            //    FangDa_FenBie[flag_Test][0] &= 31;
-            //    FangDa_FenBie[flag_Test][0] |= (byte)(temp_88 << 5);
-            //}
-
-            //buf_Xiu[2] = FangDa_FenBie[flag_Test][0];
-            //buf_Xiu[5] = FangDa_FenBie[flag_Test][1];
-            //buf_Xiu[4] = FangDa_FenBie[flag_Test][2];
+            for (int i = 0; i < 8; i++)
+            {
+                //temp_Byte[i] = Convert.ToByte(XiuGaiBeiShu_ComboBox.Text);
+                switch (XiuGaiBeiShu_ComboBox.Text)
+                {
+                    case "1": temp_Byte[i] = 0; break;
+                    case "2": temp_Byte[i] = 1; break;
+                    case "4": temp_Byte[i] = 2; break;
+                    case "6": temp_Byte[i] = 3; break;
+                    case "8": temp_Byte[i] = 4; break;
+                    case "12": temp_Byte[i] = 5; break;
+                    case "24": temp_Byte[i] = 6; break;
+                }
+            }
+            buf_Xiu[2] = (byte)(temp_Byte[0] * 32 + temp_Byte[1] * 4 + temp_Byte[2] / 2);
+            buf_Xiu[5] = (byte)((temp_Byte[2] % 2) * 128 + temp_Byte[3] * 16 + temp_Byte[4] * 2 + temp_Byte[5] / 4);
+            buf_Xiu[4] = (byte)((temp_Byte[5] % 4) * 64 + temp_Byte[6] * 8 + temp_Byte[7]);
 
             System.Diagnostics.Debug.WriteLine("XiuGai {0} {1} {2}", buf_Xiu[2], buf_Xiu[5], buf_Xiu[4]);
             if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
@@ -1614,6 +1561,8 @@ namespace EEG
                 this.Invoke(action, true);
             }
         }
+
+        
     }
 
     class Circle_Array<T>

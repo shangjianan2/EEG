@@ -127,6 +127,7 @@
             this.XiuGaiBeiShu4_ComboBox = new System.Windows.Forms.ComboBox();
             this.XiuGaiBeiShu3_ComboBox = new System.Windows.Forms.ComboBox();
             this.XiuGaiBeiShu2_ComboBox = new System.Windows.Forms.ComboBox();
+            this.TongShiFangDa_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -902,7 +903,7 @@
             // 
             // XiuGaiBeiShu_Button
             // 
-            this.XiuGaiBeiShu_Button.Location = new System.Drawing.Point(136, 41);
+            this.XiuGaiBeiShu_Button.Location = new System.Drawing.Point(1029, 138);
             this.XiuGaiBeiShu_Button.Name = "XiuGaiBeiShu_Button";
             this.XiuGaiBeiShu_Button.Size = new System.Drawing.Size(75, 23);
             this.XiuGaiBeiShu_Button.TabIndex = 27;
@@ -1069,11 +1070,22 @@
             this.XiuGaiBeiShu2_ComboBox.TabIndex = 49;
             this.XiuGaiBeiShu2_ComboBox.Text = "1";
             // 
+            // TongShiFangDa_Button
+            // 
+            this.TongShiFangDa_Button.Location = new System.Drawing.Point(136, 44);
+            this.TongShiFangDa_Button.Name = "TongShiFangDa_Button";
+            this.TongShiFangDa_Button.Size = new System.Drawing.Size(75, 23);
+            this.TongShiFangDa_Button.TabIndex = 56;
+            this.TongShiFangDa_Button.Text = "同时放大";
+            this.TongShiFangDa_Button.UseVisualStyleBackColor = true;
+            this.TongShiFangDa_Button.Click += new System.EventHandler(this.TongShiFangDa_Button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1171, 602);
+            this.Controls.Add(this.TongShiFangDa_Button);
             this.Controls.Add(this.XiuGaiBeiShu6_ComboBox);
             this.Controls.Add(this.XiuGaiBeiShu7_ComboBox);
             this.Controls.Add(this.XiuGaiBeiShu8_ComboBox);
@@ -1219,6 +1231,7 @@
         private System.Windows.Forms.ComboBox XiuGaiBeiShu4_ComboBox;
         private System.Windows.Forms.ComboBox XiuGaiBeiShu3_ComboBox;
         private System.Windows.Forms.ComboBox XiuGaiBeiShu2_ComboBox;
+        private System.Windows.Forms.Button TongShiFangDa_Button;
     }
 }
 

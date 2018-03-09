@@ -120,6 +120,13 @@
             this.PianXuanBeiShu_ComboBox = new System.Windows.Forms.ComboBox();
             this.DingZuSave_Button = new System.Windows.Forms.Button();
             this.DingZu_TextBox = new System.Windows.Forms.TextBox();
+            this.XiuGaiBeiShu6_ComboBox = new System.Windows.Forms.ComboBox();
+            this.XiuGaiBeiShu7_ComboBox = new System.Windows.Forms.ComboBox();
+            this.XiuGaiBeiShu8_ComboBox = new System.Windows.Forms.ComboBox();
+            this.XiuGaiBeiShu5_ComboBox = new System.Windows.Forms.ComboBox();
+            this.XiuGaiBeiShu4_ComboBox = new System.Windows.Forms.ComboBox();
+            this.XiuGaiBeiShu3_ComboBox = new System.Windows.Forms.ComboBox();
+            this.XiuGaiBeiShu2_ComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -911,7 +918,7 @@
             // XiuGaiBeiShu1_ComboBox
             // 
             this.XiuGaiBeiShu1_ComboBox.FormattingEnabled = true;
-            this.XiuGaiBeiShu1_ComboBox.Location = new System.Drawing.Point(288, 43);
+            this.XiuGaiBeiShu1_ComboBox.Location = new System.Drawing.Point(1029, 172);
             this.XiuGaiBeiShu1_ComboBox.Name = "XiuGaiBeiShu1_ComboBox";
             this.XiuGaiBeiShu1_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.XiuGaiBeiShu1_ComboBox.TabIndex = 32;
@@ -999,11 +1006,81 @@
             this.DingZu_TextBox.Size = new System.Drawing.Size(100, 21);
             this.DingZu_TextBox.TabIndex = 47;
             // 
+            // XiuGaiBeiShu6_ComboBox
+            // 
+            this.XiuGaiBeiShu6_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu6_ComboBox.Location = new System.Drawing.Point(1030, 316);
+            this.XiuGaiBeiShu6_ComboBox.Name = "XiuGaiBeiShu6_ComboBox";
+            this.XiuGaiBeiShu6_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu6_ComboBox.TabIndex = 55;
+            this.XiuGaiBeiShu6_ComboBox.Text = "1";
+            // 
+            // XiuGaiBeiShu7_ComboBox
+            // 
+            this.XiuGaiBeiShu7_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu7_ComboBox.Location = new System.Drawing.Point(1030, 342);
+            this.XiuGaiBeiShu7_ComboBox.Name = "XiuGaiBeiShu7_ComboBox";
+            this.XiuGaiBeiShu7_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu7_ComboBox.TabIndex = 54;
+            this.XiuGaiBeiShu7_ComboBox.Text = "1";
+            // 
+            // XiuGaiBeiShu8_ComboBox
+            // 
+            this.XiuGaiBeiShu8_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu8_ComboBox.Location = new System.Drawing.Point(1029, 368);
+            this.XiuGaiBeiShu8_ComboBox.Name = "XiuGaiBeiShu8_ComboBox";
+            this.XiuGaiBeiShu8_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu8_ComboBox.TabIndex = 53;
+            this.XiuGaiBeiShu8_ComboBox.Text = "1";
+            // 
+            // XiuGaiBeiShu5_ComboBox
+            // 
+            this.XiuGaiBeiShu5_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu5_ComboBox.Location = new System.Drawing.Point(1030, 290);
+            this.XiuGaiBeiShu5_ComboBox.Name = "XiuGaiBeiShu5_ComboBox";
+            this.XiuGaiBeiShu5_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu5_ComboBox.TabIndex = 52;
+            this.XiuGaiBeiShu5_ComboBox.Text = "1";
+            // 
+            // XiuGaiBeiShu4_ComboBox
+            // 
+            this.XiuGaiBeiShu4_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu4_ComboBox.Location = new System.Drawing.Point(1029, 264);
+            this.XiuGaiBeiShu4_ComboBox.Name = "XiuGaiBeiShu4_ComboBox";
+            this.XiuGaiBeiShu4_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu4_ComboBox.TabIndex = 51;
+            this.XiuGaiBeiShu4_ComboBox.Text = "1";
+            // 
+            // XiuGaiBeiShu3_ComboBox
+            // 
+            this.XiuGaiBeiShu3_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu3_ComboBox.Location = new System.Drawing.Point(1030, 238);
+            this.XiuGaiBeiShu3_ComboBox.Name = "XiuGaiBeiShu3_ComboBox";
+            this.XiuGaiBeiShu3_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu3_ComboBox.TabIndex = 50;
+            this.XiuGaiBeiShu3_ComboBox.Text = "1";
+            // 
+            // XiuGaiBeiShu2_ComboBox
+            // 
+            this.XiuGaiBeiShu2_ComboBox.FormattingEnabled = true;
+            this.XiuGaiBeiShu2_ComboBox.Location = new System.Drawing.Point(1029, 212);
+            this.XiuGaiBeiShu2_ComboBox.Name = "XiuGaiBeiShu2_ComboBox";
+            this.XiuGaiBeiShu2_ComboBox.Size = new System.Drawing.Size(54, 20);
+            this.XiuGaiBeiShu2_ComboBox.TabIndex = 49;
+            this.XiuGaiBeiShu2_ComboBox.Text = "1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 602);
+            this.ClientSize = new System.Drawing.Size(1171, 602);
+            this.Controls.Add(this.XiuGaiBeiShu6_ComboBox);
+            this.Controls.Add(this.XiuGaiBeiShu7_ComboBox);
+            this.Controls.Add(this.XiuGaiBeiShu8_ComboBox);
+            this.Controls.Add(this.XiuGaiBeiShu5_ComboBox);
+            this.Controls.Add(this.XiuGaiBeiShu4_ComboBox);
+            this.Controls.Add(this.XiuGaiBeiShu3_ComboBox);
+            this.Controls.Add(this.XiuGaiBeiShu2_ComboBox);
             this.Controls.Add(this.DingZu_TextBox);
             this.Controls.Add(this.DingZuSave_Button);
             this.Controls.Add(this.PianXuanPian_ComboBox);
@@ -1135,6 +1212,13 @@
         private System.Windows.Forms.ComboBox PianXuanBeiShu_ComboBox;
         private System.Windows.Forms.Button DingZuSave_Button;
         private System.Windows.Forms.TextBox DingZu_TextBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu6_ComboBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu7_ComboBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu8_ComboBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu5_ComboBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu4_ComboBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu3_ComboBox;
+        private System.Windows.Forms.ComboBox XiuGaiBeiShu2_ComboBox;
     }
 }
 

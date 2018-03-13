@@ -128,6 +128,8 @@
             this.XiuGaiBeiShu3_ComboBox = new System.Windows.Forms.ComboBox();
             this.XiuGaiBeiShu2_ComboBox = new System.Windows.Forms.ComboBox();
             this.TongShiFangDa_Button = new System.Windows.Forms.Button();
+            this.SetFileName_TextBox = new System.Windows.Forms.TextBox();
+            this.SetDirectory_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -163,7 +165,7 @@
             this.save_button.Name = "save_button";
             this.save_button.Size = new System.Drawing.Size(75, 23);
             this.save_button.TabIndex = 16;
-            this.save_button.Text = "保存位置";
+            this.save_button.Text = "保存";
             this.save_button.UseVisualStyleBackColor = true;
             this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
@@ -964,7 +966,7 @@
             // 
             // PianXuFangDa_Button
             // 
-            this.PianXuFangDa_Button.Location = new System.Drawing.Point(136, 159);
+            this.PianXuFangDa_Button.Location = new System.Drawing.Point(1009, 70);
             this.PianXuFangDa_Button.Name = "PianXuFangDa_Button";
             this.PianXuFangDa_Button.Size = new System.Drawing.Size(75, 23);
             this.PianXuFangDa_Button.TabIndex = 43;
@@ -975,7 +977,7 @@
             // PianXuanPian_ComboBox
             // 
             this.PianXuanPian_ComboBox.FormattingEnabled = true;
-            this.PianXuanPian_ComboBox.Location = new System.Drawing.Point(288, 161);
+            this.PianXuanPian_ComboBox.Location = new System.Drawing.Point(1161, 72);
             this.PianXuanPian_ComboBox.Name = "PianXuanPian_ComboBox";
             this.PianXuanPian_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.PianXuanPian_ComboBox.TabIndex = 45;
@@ -984,7 +986,7 @@
             // PianXuanBeiShu_ComboBox
             // 
             this.PianXuanBeiShu_ComboBox.FormattingEnabled = true;
-            this.PianXuanBeiShu_ComboBox.Location = new System.Drawing.Point(217, 162);
+            this.PianXuanBeiShu_ComboBox.Location = new System.Drawing.Point(1090, 73);
             this.PianXuanBeiShu_ComboBox.Name = "PianXuanBeiShu_ComboBox";
             this.PianXuanBeiShu_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.PianXuanBeiShu_ComboBox.TabIndex = 44;
@@ -992,7 +994,7 @@
             // 
             // DingZuSave_Button
             // 
-            this.DingZuSave_Button.Location = new System.Drawing.Point(288, 99);
+            this.DingZuSave_Button.Location = new System.Drawing.Point(136, 158);
             this.DingZuSave_Button.Name = "DingZuSave_Button";
             this.DingZuSave_Button.Size = new System.Drawing.Size(75, 23);
             this.DingZuSave_Button.TabIndex = 46;
@@ -1002,9 +1004,9 @@
             // 
             // DingZu_TextBox
             // 
-            this.DingZu_TextBox.Location = new System.Drawing.Point(271, 129);
+            this.DingZu_TextBox.Location = new System.Drawing.Point(217, 158);
             this.DingZu_TextBox.Name = "DingZu_TextBox";
-            this.DingZu_TextBox.Size = new System.Drawing.Size(100, 21);
+            this.DingZu_TextBox.Size = new System.Drawing.Size(54, 21);
             this.DingZu_TextBox.TabIndex = 47;
             // 
             // XiuGaiBeiShu6_ComboBox
@@ -1080,11 +1082,31 @@
             this.TongShiFangDa_Button.UseVisualStyleBackColor = true;
             this.TongShiFangDa_Button.Click += new System.EventHandler(this.TongShiFangDa_Button_Click);
             // 
+            // SetFileName_TextBox
+            // 
+            this.SetFileName_TextBox.Location = new System.Drawing.Point(217, 186);
+            this.SetFileName_TextBox.Name = "SetFileName_TextBox";
+            this.SetFileName_TextBox.Size = new System.Drawing.Size(54, 21);
+            this.SetFileName_TextBox.TabIndex = 58;
+            this.SetFileName_TextBox.Text = "1_1";
+            // 
+            // SetDirectory_Button
+            // 
+            this.SetDirectory_Button.Location = new System.Drawing.Point(136, 186);
+            this.SetDirectory_Button.Name = "SetDirectory_Button";
+            this.SetDirectory_Button.Size = new System.Drawing.Size(75, 23);
+            this.SetDirectory_Button.TabIndex = 57;
+            this.SetDirectory_Button.Text = "设定位置";
+            this.SetDirectory_Button.UseVisualStyleBackColor = true;
+            this.SetDirectory_Button.Click += new System.EventHandler(this.SetDirectory_Button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1171, 602);
+            this.Controls.Add(this.SetFileName_TextBox);
+            this.Controls.Add(this.SetDirectory_Button);
             this.Controls.Add(this.TongShiFangDa_Button);
             this.Controls.Add(this.XiuGaiBeiShu6_ComboBox);
             this.Controls.Add(this.XiuGaiBeiShu7_ComboBox);
@@ -1232,6 +1254,8 @@
         private System.Windows.Forms.ComboBox XiuGaiBeiShu3_ComboBox;
         private System.Windows.Forms.ComboBox XiuGaiBeiShu2_ComboBox;
         private System.Windows.Forms.Button TongShiFangDa_Button;
+        private System.Windows.Forms.TextBox SetFileName_TextBox;
+        private System.Windows.Forms.Button SetDirectory_Button;
     }
 }
 

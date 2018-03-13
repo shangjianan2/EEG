@@ -79,6 +79,8 @@ namespace EEG
 
         ListViewItem[] lvi_Array = null;
 
+        string auto_naming_str = "1_1";//用于自动命名
+        string SetDirectory_str = null;
         string[] Chanel_Name = null;
 
         Button[] Array_Button = null;
@@ -887,6 +889,7 @@ namespace EEG
 
         private void save_button_Click(object sender, EventArgs e)
         {
+
             save_shuju();
         }
 
@@ -998,6 +1001,114 @@ namespace EEG
                 }
             }
             #endregion
+        }
+
+        void save_shuju_auto_naming()
+        {
+            #region
+            System.Windows.Forms.SaveFileDialog sfd = new SaveFileDialog();//注意 这里是SaveFileDialog,不是OpenFileDialog
+            sfd.DefaultExt = "txt";
+            sfd.Filter = "文本文件(*.txt)|*.txt";
+
+            string str_tt = System.Environment.CurrentDirectory + "\\data\\asdf";
+            System.Diagnostics.Debug.WriteLine("CurrentDirectory {0}", str_tt);
+            sfd.FileName = str_tt;
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                //auto_naming_str = sfd.FileName;
+                //auto_naming_str = ChangeFileName(auto_naming_str);
+                System.Diagnostics.Debug.WriteLine("auto_naming_str {0}", auto_naming_str);
+                StringBuilder recBuffer16 = new StringBuilder();//定义16进制接收缓存
+
+
+                List<byte> temp_listbyte = new List<byte>();
+                int shuliang_recQueue_Save = recQueue_Save.Count;
+                byte[] temp_Buf = new byte[len];
+                for (int i = 0; i < shuliang_recQueue_Save; i++)
+                {
+                    //temp_listbyte.AddRange((byte[])recQueue_Save.Dequeue());
+                    recQueue_Save.TryDequeue(out temp_Buf);
+                    temp_listbyte.AddRange(temp_Buf);
+                }
+
+                List<Int32> jishu_rem_SaveFile = new List<Int32>();
+                int last_one = 0;
+                int current_one = 0;
+                for (int i = 0; i < (temp_listbyte.Count - 1); i++)
+                {
+                    if ((temp_listbyte[i] == 0x55) && (temp_listbyte[i + 1] == 0x55) && (temp_listbyte[i + 2] == 0xaa) && (temp_listbyte[i + 3] == 0xaa))
+                    {
+                        current_one = temp_listbyte[i + 4] * 65536 + temp_listbyte[i + 5] * 256 + temp_listbyte[i + 6];
+                        if ((current_one - last_one) != 1)
+                        {
+                            jishu_rem_SaveFile.Add(i);//把有差距的位置记录下来
+                        }
+                        last_one = current_one;
+                        i += 120;//每组128，保险起见120
+                    }
+                }
+                jishu_rem_SaveFile.Add((temp_listbyte.Count - 128 + jishu_rem_SaveFile[0]));
+
+                if (jishu_rem_SaveFile.Count != 2)//如果有断层，直接停止保存
+                {
+                    int[] duanceng = new int[2];
+                    duanceng[0] = temp_listbyte[jishu_rem_SaveFile[1] + 4] * 65536 + temp_listbyte[jishu_rem_SaveFile[1] + 5] * 256 + temp_listbyte[jishu_rem_SaveFile[1] + 6];
+                    duanceng[1] = temp_listbyte[jishu_rem_SaveFile[2] + 4] * 65536 + temp_listbyte[jishu_rem_SaveFile[2] + 5] * 256 + temp_listbyte[jishu_rem_SaveFile[2] + 6];
+                    MessageBox.Show(duanceng[0].ToString() + " " + duanceng[1].ToString(), "断层");
+                    return;
+                }
+
+                StringBuilder temp_StringBuilder = new StringBuilder();
+                //for (int j = jishu_rem_SaveFile[0]; j < jishu_rem_SaveFile[1]; j++)
+                for (int j = jishu_rem_SaveFile[0]; j < jishu_rem_SaveFile[1] + 128; j++)//因为之前会出现断层，按照以前的算法会莫明其妙的少载入一组，现在把这组填回来。PS:但凡能到达这里就说明没有断层
+                {
+                    temp_StringBuilder.AppendFormat("{0:X2}" + " ", temp_listbyte[j]);
+                }
+
+                string[] temp_Str = sfd.FileName.Split('.');
+                string fileName_tt = sfd.FileName;//std.FileName表示对话框中的路径名称
+                FileStream fs_tt = null;
+                try
+                {
+                    File.Delete(fileName_tt);//有重名的就删除掉
+                    fs_tt = new FileStream(fileName_tt, FileMode.OpenOrCreate);//返回文件表示符
+
+                    using (StreamWriter writer = new StreamWriter(fs_tt))
+                    {
+                        writer.Write(temp_StringBuilder);
+                    }
+                }
+                finally
+                {
+                    if (fs_tt != null)
+                        fs_tt.Dispose();
+                }
+            }
+            #endregion
+        }
+
+        string ChangeFileName(string origin_str)
+        {
+            string new_str;
+            string[] tou_wei_str = new string[2];
+            int tou_int, wei_int;
+            tou_wei_str = origin_str.Split('_');//将字符串按照分割符进行分割，分割成两个字符串变量
+            tou_int = Convert.ToInt16(tou_wei_str[0]);//将字符串转换成数字以备之后的运算
+            wei_int = Convert.ToInt16(tou_wei_str[1]);
+
+            if (wei_int < 6)
+            {
+                wei_int++;
+            }
+            else
+            {
+                wei_int = 1;
+                tou_int++;
+            }
+            new_str = tou_int.ToString() + "_" + wei_int.ToString();
+            
+
+            return new_str;
         }
 
         private void ReturnChart_Button_Click(object sender, EventArgs e)
@@ -1409,7 +1520,7 @@ namespace EEG
 
         private void ClearFangDa_Button_Click(object sender, EventArgs e)
         {
-            PianXuanFangDa(1, 1);
+            PianXuanFangDa(1, 1);//此命令在片选协议中是全通道置零
             PianXuanFangDa(2, 1);
             PianXuanFangDa(3, 1);
             PianXuanFangDa(4, 1);
@@ -1421,6 +1532,7 @@ namespace EEG
             }
         }
 
+        //此片选放大实际上应该是单通道放大的协议，实现的是片选放大（没有经过实际测试）
         public void PianXuanFangDa(int PianNum, int BeiShu)
         {
             int len_Xiu = 6;
@@ -1516,8 +1628,21 @@ namespace EEG
                 {
                     MessageBox.Show("定组保存", "定组保存完成");
                     DingZuSave_Button.Text = "定组保存";
+                    save_shuju_auto_naming();
                 };
                 this.Invoke(action, true);
+            }
+        }
+
+        private void SetDirectory_Button_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog sfd = new OpenFileDialog();//注意 这里是SaveFileDialog,不是OpenFileDialog
+            sfd.DefaultExt = "txt";
+            sfd.Filter = "文本文件(*.txt)|*.txt";
+            
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                SetDirectory_str = sfd.InitialDirectory;
             }
         }
 

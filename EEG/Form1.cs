@@ -649,70 +649,29 @@ namespace EEG
             }
             else//阻抗模式
             {
-                //JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
+                JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
 
-                //Action<double[]> action = (button) =>
-                //{
-                //    for (int i = 1; i <= 32; i++)
-                //    {
-                //        Change_ButtonColor(ref Array_Button[i], button[i]);
-                //    }
-                //    for (int i = 37; i <= 40; i++)
-                //    {
-                //        Change_ButtonColor(ref Array_Button[i], button[i]);
-                //    }
-                //};
-                
-                //for (int i = 1; i < 41; i++)
-                //{
-                //    //FlagButton_BoolArray[i] = (erweishuzu_Circle_Array[i].Circle_Array_T[erweishuzu_Circle_Array[i].Index_Array_Save] * 4.5 * coef_a / 8388607.0 - coef_b);
-                //    FlagButton_BoolArray[i] = (erweishuzu_Circle_Array[i].Circle_Array_T[erweishuzu_Circle_Array[i].Index_Array_Save] * 4.5 / 8388607.0);
-                
-                //}
-                //this.Invoke(action, FlagButton_BoolArray);
-
-
-                //为最大值和最小值赋初值
-                for (int i = 0; i < TongDaoShu - 1; i++)
+                Action<double[]> action = (button) =>
                 {
-                    maxValue[i] = 0;
-                    minValue[i] = 1000;
-                }
-
-                if (test_FIR_ttt == false)
-                    //JieXiShuJu(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
-                    JieXiShuJu_tt(ref recQueue_test, ref erweishuzu_Circle_Array, SelectChanel);
-                else
-                    //JieXiLvBoShuJu(ref recQueue_test, ref FIR_h, ref erweishuzu_Circle_Array, SelectChanel);
-                    JieXiLvBoShuJu_tt(ref recQueue_test, ref FIR_h, ref erweishuzu_Circle_Array, SelectChanel);
-
-                int temp_Index = erweishuzu_Circle_Array[1].Index_Array_Save;
-
-                Action<bool> action = (x) =>
-                {
-                    for (int j = 0; j < 40; j++)
-                    {
-                        temp_Index = erweishuzu_Circle_Array[j + 1].Index_Array_Save;
-                        for (int i = 0; i < 500; i++)//500组数据对应500毫秒
-                        {
-                            //serial_ch[j].Points.AddXY(i, (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index) + j * 1000) * 4.5 / 8388607.0);
-                            //获取每个通道的最小值
-                            maxValue[j] = (maxValue[j] < (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) ? (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) : maxValue[j]);
-                            minValue[j] = (minValue[j] > (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) ? (erweishuzu_Circle_Array[j + 1].Circle_Read(ref temp_Index)) : minValue[j]);
-                        }
-                        youxiaoValue[j + 1] = (maxValue[j] - minValue[j]) * 0.70710678 * 4.5 / 8388607.0;
-                    }
-
                     for (int i = 1; i <= 32; i++)
                     {
-                        Change_ButtonColor(ref Array_Button[i], youxiaoValue[i]);
+                        Change_ButtonColor(ref Array_Button[i], button[i]);
                     }
                     for (int i = 37; i <= 40; i++)
                     {
-                        Change_ButtonColor(ref Array_Button[i], youxiaoValue[i]);
+                        Change_ButtonColor(ref Array_Button[i], button[i]);
                     }
                 };
-                this.Invoke(action, true);
+                
+                for (int i = 1; i < 41; i++)
+                {
+                    FlagButton_BoolArray[i] = (erweishuzu_Circle_Array[i].Circle_Array_T[erweishuzu_Circle_Array[i].Index_Array_Save] * 4.5 * coef_a / 8388607.0 - coef_b);
+                }
+                this.Invoke(action, FlagButton_BoolArray);
+            
+
+                //System.Diagnostics.Debug.WriteLine("display {0}", stopwatch_test.ElapsedMilliseconds);
+                stopwatch_test.Reset();
             }
         }
 

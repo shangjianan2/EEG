@@ -690,6 +690,7 @@ namespace EEG
         {
             Param_Button.Text = ZuKang.ToString();
 
+
             if (ZuKang > 430)
             {
                 Param_Button.BackColor = Color.Fuchsia;//20.0

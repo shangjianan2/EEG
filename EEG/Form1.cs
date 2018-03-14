@@ -1628,9 +1628,9 @@ namespace EEG
                     MessageBox.Show("定组保存", "定组保存完成");
                     DingZuSave_Button.Text = "定组保存";
                     //更改保存的文件名
+                    save_shuju_auto_naming();
                     auto_naming_str = ChangeFileName(auto_naming_str);
                     this.SetFileName_TextBox.Text = auto_naming_str;
-                    save_shuju_auto_naming();
                 };
                 this.Invoke(action, true);
             }

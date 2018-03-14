@@ -689,67 +689,67 @@ namespace EEG
         void Change_ButtonColor(ref Button Param_Button, double ZuKang)
         {
             Param_Button.Text = ZuKang.ToString();
-            
-            //if (ZuKang > 430)
-            //{
-            //    Param_Button.BackColor = Color.Fuchsia;//20.0
-            //}
-            //else if (ZuKang > 400)
-            //{
-            //    Param_Button.BackColor = Color.Indigo;//18.9
-            //}
-            //else if (ZuKang > 370)
-            //{
-            //    Param_Button.BackColor = Color.OrangeRed;//17.9
-            //}
-            //else if (ZuKang > 340)
-            //{
-            //    Param_Button.BackColor = Color.DarkOrange;//16.8
-            //}
-            //else if (ZuKang > 310)
-            //{
-            //    Param_Button.BackColor = Color.Sienna;//15.7
-            //}
-            //else if (ZuKang > 280)
-            //{
-            //    Param_Button.BackColor = Color.Khaki;//14.6
-            //}
-            //else if (ZuKang > 250)
-            //{
-            //    Param_Button.BackColor = Color.Yellow;//13.6
-            //}
-            //else if (ZuKang > 220)
-            //{
-            //    Param_Button.BackColor = Color.GreenYellow;//12.5
-            //}
-            //else if (ZuKang > 190)
-            //{
-            //    Param_Button.BackColor = Color.Green;//11.4
-            //}
-            //else if (ZuKang > 160)
-            //{
-            //    Param_Button.BackColor = Color.DarkGreen;//10.4
-            //}
-            //else if (ZuKang > 130)
-            //{
-            //    Param_Button.BackColor = Color.SkyBlue;//9.3
-            //}
-            //else if (ZuKang > 100)
-            //{
-            //    Param_Button.BackColor = Color.DarkTurquoise;//8.2
-            //}
-            //else if (ZuKang > 70)
-            //{
-            //    Param_Button.BackColor = Color.DeepSkyBlue;//7.1
-            //}
-            //else if (ZuKang > 40)
-            //{
-            //    Param_Button.BackColor = Color.Blue;//6
-            //}
-            //else
-            //{
-            //    Param_Button.BackColor = Color.MidnightBlue;//5
-            //}
+
+            if (ZuKang > 430)
+            {
+                Param_Button.BackColor = Color.Fuchsia;//20.0
+            }
+            else if (ZuKang > 400)
+            {
+                Param_Button.BackColor = Color.Indigo;//18.9
+            }
+            else if (ZuKang > 370)
+            {
+                Param_Button.BackColor = Color.OrangeRed;//17.9
+            }
+            else if (ZuKang > 340)
+            {
+                Param_Button.BackColor = Color.DarkOrange;//16.8
+            }
+            else if (ZuKang > 310)
+            {
+                Param_Button.BackColor = Color.Sienna;//15.7
+            }
+            else if (ZuKang > 280)
+            {
+                Param_Button.BackColor = Color.Khaki;//14.6
+            }
+            else if (ZuKang > 250)
+            {
+                Param_Button.BackColor = Color.Yellow;//13.6
+            }
+            else if (ZuKang > 220)
+            {
+                Param_Button.BackColor = Color.GreenYellow;//12.5
+            }
+            else if (ZuKang > 190)
+            {
+                Param_Button.BackColor = Color.Green;//11.4
+            }
+            else if (ZuKang > 160)
+            {
+                Param_Button.BackColor = Color.DarkGreen;//10.4
+            }
+            else if (ZuKang > 130)
+            {
+                Param_Button.BackColor = Color.SkyBlue;//9.3
+            }
+            else if (ZuKang > 100)
+            {
+                Param_Button.BackColor = Color.DarkTurquoise;//8.2
+            }
+            else if (ZuKang > 70)
+            {
+                Param_Button.BackColor = Color.DeepSkyBlue;//7.1
+            }
+            else if (ZuKang > 40)
+            {
+                Param_Button.BackColor = Color.Blue;//6
+            }
+            else
+            {
+                Param_Button.BackColor = Color.MidnightBlue;//5
+            }
         }
 
         private void InitChart()

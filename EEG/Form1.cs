@@ -1006,18 +1006,17 @@ namespace EEG
         void save_shuju_auto_naming()
         {
             #region
-            System.Windows.Forms.SaveFileDialog sfd = new SaveFileDialog();//注意 这里是SaveFileDialog,不是OpenFileDialog
-            sfd.DefaultExt = "txt";
-            sfd.Filter = "文本文件(*.txt)|*.txt";
+            //System.Windows.Forms.SaveFileDialog sfd = new SaveFileDialog();//注意 这里是SaveFileDialog,不是OpenFileDialog
+            //sfd.DefaultExt = "txt";
+            //sfd.Filter = "文本文件(*.txt)|*.txt";
 
-            string str_tt = System.Environment.CurrentDirectory + "\\data\\asdf";
-            System.Diagnostics.Debug.WriteLine("CurrentDirectory {0}", str_tt);
-            sfd.FileName = str_tt;
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                //auto_naming_str = sfd.FileName;
-                //auto_naming_str = ChangeFileName(auto_naming_str);
-                System.Diagnostics.Debug.WriteLine("auto_naming_str {0}", auto_naming_str);
+            //string str_tt = System.Environment.CurrentDirectory + "\\data\\asdf";
+            //System.Diagnostics.Debug.WriteLine("CurrentDirectory {0}", str_tt);
+            //sfd.FileName = str_tt;
+            //if (sfd.ShowDialog() == DialogResult.OK)
+            //{
+            auto_naming_str = this.SetFileName_TextBox.Text;
+            //    System.Diagnostics.Debug.WriteLine("auto_naming_str {0}", auto_naming_str);
                 StringBuilder recBuffer16 = new StringBuilder();//定义16进制接收缓存
 
 
@@ -1065,8 +1064,8 @@ namespace EEG
                     temp_StringBuilder.AppendFormat("{0:X2}" + " ", temp_listbyte[j]);
                 }
 
-                string[] temp_Str = sfd.FileName.Split('.');
-                string fileName_tt = sfd.FileName;//std.FileName表示对话框中的路径名称
+                //string[] temp_Str = sfd.FileName.Split('.');
+                string fileName_tt = SetDirectory_str + "\\" + auto_naming_str + ".txt";//std.FileName表示对话框中的路径名称
                 FileStream fs_tt = null;
                 try
                 {
@@ -1083,7 +1082,7 @@ namespace EEG
                     if (fs_tt != null)
                         fs_tt.Dispose();
                 }
-            }
+           // }
             #endregion
         }
 
@@ -1628,6 +1627,9 @@ namespace EEG
                 {
                     MessageBox.Show("定组保存", "定组保存完成");
                     DingZuSave_Button.Text = "定组保存";
+                    //更改保存的文件名
+                    auto_naming_str = ChangeFileName(auto_naming_str);
+                    this.SetFileName_TextBox.Text = auto_naming_str;
                     save_shuju_auto_naming();
                 };
                 this.Invoke(action, true);
@@ -1636,14 +1638,18 @@ namespace EEG
 
         private void SetDirectory_Button_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog sfd = new OpenFileDialog();//注意 这里是SaveFileDialog,不是OpenFileDialog
-            sfd.DefaultExt = "txt";
-            sfd.Filter = "文本文件(*.txt)|*.txt";
+            System.Windows.Forms.FolderBrowserDialog sfd = new FolderBrowserDialog();//注意 这里是SaveFileDialog,不是OpenFileDialog
+
             
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                SetDirectory_str = sfd.InitialDirectory;
+                SetDirectory_str = sfd.SelectedPath;
             }
+        }
+
+        private void SetFileName_TextBox_TextChanged(object sender, EventArgs e)
+        {
+            auto_naming_str = this.SetFileName_TextBox.Text;
         }
 
         

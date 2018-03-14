@@ -1089,6 +1089,7 @@
             this.SetFileName_TextBox.Size = new System.Drawing.Size(54, 21);
             this.SetFileName_TextBox.TabIndex = 58;
             this.SetFileName_TextBox.Text = "1_1";
+            this.SetFileName_TextBox.TextChanged += new System.EventHandler(this.SetFileName_TextBox_TextChanged);
             // 
             // SetDirectory_Button
             // 

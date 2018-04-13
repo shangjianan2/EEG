@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.start_button = new System.Windows.Forms.Button();
             this.saveBegin_Button = new System.Windows.Forms.Button();
             this.save_button = new System.Windows.Forms.Button();
@@ -123,8 +123,8 @@
             this.TongShiFangDa_Button = new System.Windows.Forms.Button();
             this.TongShiFangDa_ComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -207,16 +207,16 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(615, 544);
             this.chart1.TabIndex = 18;
             this.chart1.Text = "chart1";
@@ -1011,7 +1011,7 @@
             this.TongShiFangDa_Button.Name = "TongShiFangDa_Button";
             this.TongShiFangDa_Button.Size = new System.Drawing.Size(75, 23);
             this.TongShiFangDa_Button.TabIndex = 48;
-            this.TongShiFangDa_Button.Text = "修改放大倍数";
+            this.TongShiFangDa_Button.Text = "全部放大";
             this.TongShiFangDa_Button.UseVisualStyleBackColor = true;
             this.TongShiFangDa_Button.Click += new System.EventHandler(this.TongShiFangDa_Button_Click);
             // 
@@ -1039,15 +1039,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "放大倍数面板";
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(150, 25);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(41, 12);
-            this.label23.TabIndex = 49;
-            this.label23.Text = "通道号";
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
@@ -1056,6 +1047,15 @@
             this.label24.Size = new System.Drawing.Size(29, 12);
             this.label24.TabIndex = 50;
             this.label24.Text = "倍数";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(150, 25);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 12);
+            this.label23.TabIndex = 49;
+            this.label23.Text = "通道号";
             // 
             // Form1
             // 

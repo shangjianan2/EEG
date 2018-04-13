@@ -884,7 +884,8 @@ namespace EEG
 
                 Flag__DisplayChart_ThreadingTimer__ReturnChart_Button_Click = true;
 
-                ClearFangDa_Button_Click(this, null);//保证每次上位机开启时下位机的放大倍数为1
+                XiuGaiBeiShu_ComboBox.Text = "1";//整个参数是TongShiFangDa_Button_Click函数的输入之一，TongShiFangDa_Button_Click函数会检测这个变量，并修改成相应的放大倍数
+                TongShiFangDa_Button_Click(this, null);//保证每次上位机开启时下位机的放大倍数为1
 
                 //链接设备两秒后可以使用“定组保存”
                 //Timer_ThreadingTimer_DingZu = new System.Threading.Timer(new TimerCallback(DisplayChart_ThreadingTimer_DingZu), null, 2000, 0);

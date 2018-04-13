@@ -1434,10 +1434,12 @@ namespace EEG
             if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
                 MessageBox.Show("error", "修改放大倍数失败");
 
-            Thread.Sleep(100);
+            Thread.Sleep(500);
 
             if (MyDevice.BulkOutEndPt.XferData(ref buf_Xiu, ref len_Xiu) != true)
                 MessageBox.Show("error", "修改放大倍数失败");
+
+            MessageBox.Show("提示", "修改结束");
         }
 
         private void TongShiFangDa_Button_Click(object sender, EventArgs e)

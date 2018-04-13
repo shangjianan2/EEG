@@ -1447,6 +1447,15 @@ namespace EEG
             TongShiFangDa_tt("24");
             TongShiFangDa_tt("32");
             TongShiFangDa_tt("40");
+
+            Thread.Sleep(500);
+
+            TongShiFangDa_tt("8");
+            TongShiFangDa_tt("16");
+            TongShiFangDa_tt("24");
+            TongShiFangDa_tt("32");
+            TongShiFangDa_tt("40");
+            MessageBox.Show("提示", "修改结束");
         }
 
         void TongShiFangDa_tt(string xiu)

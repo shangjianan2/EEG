@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.start_button = new System.Windows.Forms.Button();
             this.saveBegin_Button = new System.Windows.Forms.Button();
             this.save_button = new System.Windows.Forms.Button();
@@ -122,6 +122,9 @@
             this.DingZu_TextBox = new System.Windows.Forms.TextBox();
             this.TongShiFangDa_Button = new System.Windows.Forms.Button();
             this.TongShiFangDa_ComboBox = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.My_TabControl.SuspendLayout();
             this.chart1_TabPage.SuspendLayout();
@@ -129,6 +132,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Flash_PictureBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // start_button
@@ -203,16 +207,16 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(615, 544);
             this.chart1.TabIndex = 18;
             this.chart1.Text = "chart1";
@@ -870,7 +874,7 @@
             // XiuGaiCaiYang_ComboBox
             // 
             this.XiuGaiCaiYang_ComboBox.FormattingEnabled = true;
-            this.XiuGaiCaiYang_ComboBox.Location = new System.Drawing.Point(217, 73);
+            this.XiuGaiCaiYang_ComboBox.Location = new System.Drawing.Point(217, 44);
             this.XiuGaiCaiYang_ComboBox.Name = "XiuGaiCaiYang_ComboBox";
             this.XiuGaiCaiYang_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.XiuGaiCaiYang_ComboBox.TabIndex = 30;
@@ -878,7 +882,7 @@
             // 
             // XiuGaiCaiYang_Button
             // 
-            this.XiuGaiCaiYang_Button.Location = new System.Drawing.Point(136, 70);
+            this.XiuGaiCaiYang_Button.Location = new System.Drawing.Point(136, 41);
             this.XiuGaiCaiYang_Button.Name = "XiuGaiCaiYang_Button";
             this.XiuGaiCaiYang_Button.Size = new System.Drawing.Size(75, 23);
             this.XiuGaiCaiYang_Button.TabIndex = 29;
@@ -889,7 +893,7 @@
             // XiuGaiBeiShu_ComboBox
             // 
             this.XiuGaiBeiShu_ComboBox.FormattingEnabled = true;
-            this.XiuGaiBeiShu_ComboBox.Location = new System.Drawing.Point(217, 44);
+            this.XiuGaiBeiShu_ComboBox.Location = new System.Drawing.Point(140, 73);
             this.XiuGaiBeiShu_ComboBox.Name = "XiuGaiBeiShu_ComboBox";
             this.XiuGaiBeiShu_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.XiuGaiBeiShu_ComboBox.TabIndex = 28;
@@ -897,11 +901,11 @@
             // 
             // XiuGaiBeiShu_Button
             // 
-            this.XiuGaiBeiShu_Button.Location = new System.Drawing.Point(136, 41);
+            this.XiuGaiBeiShu_Button.Location = new System.Drawing.Point(6, 36);
             this.XiuGaiBeiShu_Button.Name = "XiuGaiBeiShu_Button";
             this.XiuGaiBeiShu_Button.Size = new System.Drawing.Size(75, 23);
             this.XiuGaiBeiShu_Button.TabIndex = 27;
-            this.XiuGaiBeiShu_Button.Text = "修改放大倍数";
+            this.XiuGaiBeiShu_Button.Text = "单通道放大";
             this.XiuGaiBeiShu_Button.UseVisualStyleBackColor = true;
             this.XiuGaiBeiShu_Button.Click += new System.EventHandler(this.XiuGaiBeiShu_Button_Click);
             // 
@@ -913,7 +917,7 @@
             // XiuGaiBeiShu1_ComboBox
             // 
             this.XiuGaiBeiShu1_ComboBox.FormattingEnabled = true;
-            this.XiuGaiBeiShu1_ComboBox.Location = new System.Drawing.Point(288, 43);
+            this.XiuGaiBeiShu1_ComboBox.Location = new System.Drawing.Point(140, 36);
             this.XiuGaiBeiShu1_ComboBox.Name = "XiuGaiBeiShu1_ComboBox";
             this.XiuGaiBeiShu1_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.XiuGaiBeiShu1_ComboBox.TabIndex = 32;
@@ -921,15 +925,15 @@
             // 
             // Flash_PictureBox
             // 
-            this.Flash_PictureBox.Location = new System.Drawing.Point(331, 249);
+            this.Flash_PictureBox.Location = new System.Drawing.Point(317, 246);
             this.Flash_PictureBox.Name = "Flash_PictureBox";
-            this.Flash_PictureBox.Size = new System.Drawing.Size(44, 42);
+            this.Flash_PictureBox.Size = new System.Drawing.Size(58, 55);
             this.Flash_PictureBox.TabIndex = 31;
             this.Flash_PictureBox.TabStop = false;
             // 
             // DingShiSave_Button
             // 
-            this.DingShiSave_Button.Location = new System.Drawing.Point(136, 99);
+            this.DingShiSave_Button.Location = new System.Drawing.Point(136, 70);
             this.DingShiSave_Button.Name = "DingShiSave_Button";
             this.DingShiSave_Button.Size = new System.Drawing.Size(75, 23);
             this.DingShiSave_Button.TabIndex = 40;
@@ -940,7 +944,7 @@
             // DingShiSave_ComboBox
             // 
             this.DingShiSave_ComboBox.FormattingEnabled = true;
-            this.DingShiSave_ComboBox.Location = new System.Drawing.Point(217, 99);
+            this.DingShiSave_ComboBox.Location = new System.Drawing.Point(217, 70);
             this.DingShiSave_ComboBox.Name = "DingShiSave_ComboBox";
             this.DingShiSave_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.DingShiSave_ComboBox.TabIndex = 41;
@@ -948,7 +952,7 @@
             // 
             // ClearFangDa_Button
             // 
-            this.ClearFangDa_Button.Location = new System.Drawing.Point(136, 129);
+            this.ClearFangDa_Button.Location = new System.Drawing.Point(136, 100);
             this.ClearFangDa_Button.Name = "ClearFangDa_Button";
             this.ClearFangDa_Button.Size = new System.Drawing.Size(75, 23);
             this.ClearFangDa_Button.TabIndex = 42;
@@ -958,7 +962,7 @@
             // 
             // PianXuFangDa_Button
             // 
-            this.PianXuFangDa_Button.Location = new System.Drawing.Point(136, 159);
+            this.PianXuFangDa_Button.Location = new System.Drawing.Point(136, 130);
             this.PianXuFangDa_Button.Name = "PianXuFangDa_Button";
             this.PianXuFangDa_Button.Size = new System.Drawing.Size(75, 23);
             this.PianXuFangDa_Button.TabIndex = 43;
@@ -969,7 +973,7 @@
             // PianXuanPian_ComboBox
             // 
             this.PianXuanPian_ComboBox.FormattingEnabled = true;
-            this.PianXuanPian_ComboBox.Location = new System.Drawing.Point(288, 161);
+            this.PianXuanPian_ComboBox.Location = new System.Drawing.Point(288, 132);
             this.PianXuanPian_ComboBox.Name = "PianXuanPian_ComboBox";
             this.PianXuanPian_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.PianXuanPian_ComboBox.TabIndex = 45;
@@ -978,7 +982,7 @@
             // PianXuanBeiShu_ComboBox
             // 
             this.PianXuanBeiShu_ComboBox.FormattingEnabled = true;
-            this.PianXuanBeiShu_ComboBox.Location = new System.Drawing.Point(217, 162);
+            this.PianXuanBeiShu_ComboBox.Location = new System.Drawing.Point(217, 133);
             this.PianXuanBeiShu_ComboBox.Name = "PianXuanBeiShu_ComboBox";
             this.PianXuanBeiShu_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.PianXuanBeiShu_ComboBox.TabIndex = 44;
@@ -986,7 +990,7 @@
             // 
             // DingZuSave_Button
             // 
-            this.DingZuSave_Button.Location = new System.Drawing.Point(288, 99);
+            this.DingZuSave_Button.Location = new System.Drawing.Point(288, 70);
             this.DingZuSave_Button.Name = "DingZuSave_Button";
             this.DingZuSave_Button.Size = new System.Drawing.Size(75, 23);
             this.DingZuSave_Button.TabIndex = 46;
@@ -996,14 +1000,14 @@
             // 
             // DingZu_TextBox
             // 
-            this.DingZu_TextBox.Location = new System.Drawing.Point(271, 129);
+            this.DingZu_TextBox.Location = new System.Drawing.Point(271, 100);
             this.DingZu_TextBox.Name = "DingZu_TextBox";
             this.DingZu_TextBox.Size = new System.Drawing.Size(100, 21);
             this.DingZu_TextBox.TabIndex = 47;
             // 
             // TongShiFangDa_Button
             // 
-            this.TongShiFangDa_Button.Location = new System.Drawing.Point(136, 207);
+            this.TongShiFangDa_Button.Location = new System.Drawing.Point(6, 71);
             this.TongShiFangDa_Button.Name = "TongShiFangDa_Button";
             this.TongShiFangDa_Button.Size = new System.Drawing.Size(75, 23);
             this.TongShiFangDa_Button.TabIndex = 48;
@@ -1014,19 +1018,52 @@
             // TongShiFangDa_ComboBox
             // 
             this.TongShiFangDa_ComboBox.FormattingEnabled = true;
-            this.TongShiFangDa_ComboBox.Location = new System.Drawing.Point(217, 210);
+            this.TongShiFangDa_ComboBox.Location = new System.Drawing.Point(240, 192);
             this.TongShiFangDa_ComboBox.Name = "TongShiFangDa_ComboBox";
             this.TongShiFangDa_ComboBox.Size = new System.Drawing.Size(54, 20);
             this.TongShiFangDa_ComboBox.TabIndex = 49;
             this.TongShiFangDa_ComboBox.Text = "1";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.TongShiFangDa_Button);
+            this.groupBox1.Controls.Add(this.XiuGaiBeiShu_ComboBox);
+            this.groupBox1.Controls.Add(this.XiuGaiBeiShu1_ComboBox);
+            this.groupBox1.Controls.Add(this.XiuGaiBeiShu_Button);
+            this.groupBox1.Location = new System.Drawing.Point(136, 130);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(227, 110);
+            this.groupBox1.TabIndex = 50;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "放大倍数面板";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(150, 25);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 12);
+            this.label23.TabIndex = 49;
+            this.label23.Text = "通道号";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(150, 61);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(29, 12);
+            this.label24.TabIndex = 50;
+            this.label24.Text = "倍数";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 602);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.TongShiFangDa_ComboBox);
-            this.Controls.Add(this.TongShiFangDa_Button);
             this.Controls.Add(this.DingZu_TextBox);
             this.Controls.Add(this.DingZuSave_Button);
             this.Controls.Add(this.PianXuanPian_ComboBox);
@@ -1035,12 +1072,9 @@
             this.Controls.Add(this.ClearFangDa_Button);
             this.Controls.Add(this.DingShiSave_ComboBox);
             this.Controls.Add(this.DingShiSave_Button);
-            this.Controls.Add(this.XiuGaiBeiShu1_ComboBox);
             this.Controls.Add(this.Flash_PictureBox);
             this.Controls.Add(this.XiuGaiCaiYang_ComboBox);
             this.Controls.Add(this.XiuGaiCaiYang_Button);
-            this.Controls.Add(this.XiuGaiBeiShu_ComboBox);
-            this.Controls.Add(this.XiuGaiBeiShu_Button);
             this.Controls.Add(this.ModeChange_ComboBox);
             this.Controls.Add(this.ModeChange_Button);
             this.Controls.Add(this.My_TabControl);
@@ -1063,6 +1097,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Flash_PictureBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1160,6 +1196,9 @@
         private System.Windows.Forms.TextBox DingZu_TextBox;
         private System.Windows.Forms.Button TongShiFangDa_Button;
         private System.Windows.Forms.ComboBox TongShiFangDa_ComboBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
     }
 }
 

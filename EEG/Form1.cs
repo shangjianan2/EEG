@@ -1455,6 +1455,10 @@ namespace EEG
             TongShiFangDa_tt("24");
             TongShiFangDa_tt("32");
             TongShiFangDa_tt("40");
+            for (int i = 0; i < 40; i++ )
+            {
+                lvi_Array[i].SubItems[3].Text = XiuGaiBeiShu_ComboBox.Text;
+            }
             MessageBox.Show("提示", "修改结束");
         }
 
